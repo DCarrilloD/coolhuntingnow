@@ -1,0 +1,80 @@
+---
+const { data } = Astro.props;
+---
+
+<section class="py-8 border-t border-white/5 relative overflow-hidden">
+    <div class="container mx-auto px-6">
+        <div class="max-w-4xl mx-auto space-y-12">
+            
+            <!-- Header Section: Simplified -->
+            <div class="text-center mb-8">
+            </div>
+
+            <!-- Dashboard of Metris -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                 <!-- Adoption Level -->
+                 <div class="glass p-10 rounded-3xl border border-white/5 flex flex-col items-center text-center">
+                    <div class="text-[10px] font-black uppercase tracking-[0.3em] text-white/30 mb-8">Nivel de Adopción</div>
+                    <div class="relative w-32 h-32 flex items-center justify-center">
+                        <svg class="w-full h-full -rotate-90">
+                           <circle cx="64" cy="64" r="60" stroke="currentColor" stroke-width="8" fill="transparent" class="text-white/5" />
+                           <circle cx="64" cy="64" r="60" stroke="currentColor" stroke-width="8" fill="transparent" class="text-brand-vibe" style={`stroke-dasharray: 377; stroke-dashoffset: ${377 - (377 * (data.nivel_de_adopcion || 0)) / 100}; transition: stroke-dashoffset 2s ease-out;`} />
+                        </svg>
+                        <span class="absolute text-3xl font-black text-white">{data.nivel_de_adopcion}%</span>
+                    </div>
+                 </div>
+
+                 <!-- Social Sentiment -->
+                 <div class="glass p-10 rounded-3xl border border-white/5 flex flex-col items-center text-center">
+                    <div class="text-[10px] font-black uppercase tracking-[0.3em] text-white/30 mb-8">Sentimiento Social</div>
+                    <div class="flex-1 flex items-center justify-center">
+                        <div class="text-4xl font-black text-white uppercase tracking-tighter italic">
+                            {data.sentimiento_social || 'Neutral'}
+                        </div>
+                    </div>
+                    <div class="w-full h-1 bg-white/10 mt-8 rounded-full overflow-hidden">
+                        <div class="h-full bg-brand-vibe w-2/3 animate-pulse"></div>
+                    </div>
+                 </div>
+
+                 <!-- Early Adopters -->
+                 <div class="glass p-10 rounded-3xl border border-white/5 flex flex-col justify-center items-center text-center">
+                    <div class="text-[10px] font-black uppercase tracking-[0.3em] text-white/30 mb-8">Early Adopters</div>
+                    <p class="text-sm text-white/70 font-light leading-relaxed">
+                        {data.early_adopters}
+                    </p>
+                 </div>
+            </div>
+
+            <!-- Content Area -->
+            <div class="relative">
+                <div class="absolute -left-12 top-0 bottom-0 w-px bg-gradient-to-b from-brand-vibe to-transparent opacity-30 hidden md:block"></div>
+                
+                <div class="prose prose-invert max-w-none text-xl text-white/70 font-light leading-loose">
+                    <Fragment set:html={data.texto_principal} />
+                </div>
+
+                {data.img_principal && (
+                    <div class="mt-20 rounded-[3rem] overflow-hidden border border-white/10">
+                        <img src={data.img_principal.url} alt="Cultural signal visualization" class="w-full opacity-80" />
+                    </div>
+                )}
+            </div>
+
+            <div class="flex justify-center gap-4 text-xs font-black text-brand-vibe/50 uppercase tracking-widest">
+                {data.hashtags?.split(',').map((tag: string) => (
+                    <span>#{tag.trim()}</span>
+                ))}
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<style>
+    .glass {
+        background: rgba(255, 255, 255, 0.03);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+    }
+</style>

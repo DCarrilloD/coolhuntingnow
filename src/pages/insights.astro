@@ -1,0 +1,269 @@
+---
+import Layout from '../layouts/Layout.astro';
+import InsightCard from '../components/InsightCard.astro';
+
+import fetchApi from '../lib/strapi';
+
+// Categorías Principales
+const mockCategories = ["Todos", "Escenarios Futuros", "Estudios", "Innovaciones", "Tendencias"];
+
+// Niveles Simplificados
+const filterLevels = [
+  { id: "recent", label: "Más Recientes" },
+  { id: "old", label: "Archivo" }
+];
+
+// FETCH REAL DESDE STRAPI
+let rawInsights: any[] = [];
+try {
+  rawInsights = await fetchApi<any[]>({
+      endpoint: 'insights',
+      query: 'populate=*',
+      wrappedByKey: 'data'
+  }) || [];
+} catch (e) {
+  console.error("Error fetching insights in Hub:", e);
+  // Fallback Mock Data for Hub
+  rawInsights = [
+      { title: "El Futuro de la Movilidad", slug: "movilidad", category: { name: "Escenarios Futuros" }, description: "Analizando el transporte post-digital.", publishedAt: new Date().toISOString() },
+      { title: "Materiales Sostenibles", slug: "materiales", category: { name: "Innovación" }, description: "Nuevas fronteras en diseño circular.", publishedAt: new Date().toISOString() },
+      { title: "IA y Creatividad", slug: "ia-creatividad", category: { name: "Tendencias" }, description: "El papel humano en la era algorítmica.", publishedAt: new Date().toISOString() }
+  ];
+}
+
+
+// MAPEO DE DATOS AL FORMATO DE LA UI
+const insights = rawInsights.map(item => {
+    // Lógica de Archivo: si tiene más de 90 días, va al archivo
+    const isOld = (new Date().getTime() - new Date(item.publishedAt).getTime()) > (90 * 24 * 60 * 60 * 1000);
+    
+    return {
+        title: item.title,
+        slug: item.slug,
+        category: item.category?.name || 'General',
+        description: item.description,
+        cover: item.coverImage?.url || 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80',
+        date: new Date(item.publishedAt).toLocaleDateString('es-ES', { day: 'numeric', month: 'short', year: 'numeric' }),
+        time: isOld ? 'old' : 'recent',
+        timestamp: new Date(item.publishedAt).getTime()
+    };
+});
+
+const sortedInsights = [...insights].sort((a, b) => b.timestamp - a.timestamp);
+---
+
+<Layout title="Insights Hub | CoolhuntingNow">
+  <main class="pt-32 pb-40 min-h-screen bg-[#020617] relative overflow-hidden">
+    
+    <!-- MASTER BACKGROUND WITH PARALLAX GRID -->
+    <div class="fixed inset-0 z-0 pointer-events-none">
+       <div class="perspective-grid absolute bottom-0 left-0 w-full h-[70%] opacity-20 transform-gpu"></div>
+       <div id="particles" class="absolute inset-0 z-0"></div>
+       <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-[radial-gradient(circle_at_center,_transparent_0%,_#020617_100%)]"></div>
+       <div class="absolute top-0 left-0 w-full h-full opacity-[0.03] pointer-events-none font-mono text-[9px] text-brand-vibe px-4 overflow-hidden select-none whitespace-pre">
+          {Array.from({length: 30}).map(() => (
+            <div class="animate-data-stream">0x{Math.random().toString(16).substr(2, 8)} SYNCING_NODE_{Math.floor(Math.random()*999)} .. STABLE</div>
+          ))}
+       </div>
+    </div>
+
+    <section class="container mx-auto px-6 relative z-10">
+      
+      <!-- HERO AREA: REFINED SCALES + 3D CORE -->
+      <div class="flex flex-col lg:flex-row justify-between items-center gap-16 mb-24 pt-6">
+        
+        <div class="flex-1 animate-fade-in relative z-10">
+          <div class="flex items-center gap-4 mb-8 group">
+             <div class="h-px w-12 bg-brand-vibe shadow-[0_0_15px_#f02aa6] transition-all group-hover:w-20"></div>
+             <span class="text-[10px] font-black uppercase tracking-[0.5em] text-white/40 group-hover:text-brand-cyan transition-colors">Strategic_Intelligence_Sync</span>
+          </div>
+          <h1 class="font-outfit text-6xl md:text-8xl font-black mb-10 tracking-tighter leading-[0.85] text-white glitch-title" data-text="INTELIGENCIA ESTRATÉGICA">
+            INTELIGENCIA <br/> 
+            <span class="text-glow-vibe text-brand-vibe italic tracking-[-0.05em] block">ESTRATÉGICA</span>
+          </h1>
+          
+          <div class="max-w-xl glass p-8 rounded-[2.5rem] border border-white/5 backdrop-blur-[40px] relative overflow-hidden group">
+             <div class="absolute top-0 right-0 p-4 opacity-10 font-mono text-[7px] text-white">
+                SYS_STATUS: OPTIMAL<br/>
+                COORD_LOCK: ACTIVE
+             </div>
+             <p class="text-xl text-white/50 font-light leading-relaxed tracking-tight">
+                Descodificando el ruido global. Acceso exclusivo a la biblioteca de señales que están configurando el próximo <span class="text-white font-black underline decoration-brand-vibe/50 decoration-2 underline-offset-4 cursor-help">paradigma sistémico</span>.
+             </p>
+             <div class="mt-6 flex gap-4 text-[9px] font-mono text-white/10 group-hover:text-white/30 transition-colors">
+                <span id="coord-display">40.4124N / 3.7038W</span>
+             </div>
+          </div>
+        </div>
+
+        <!-- THE SINGULARITY (REFINED SCALES) -->
+        <div class="w-full lg:w-2/5 flex justify-center items-center relative h-[450px]" id="parallax-container">
+           <div id="mouse-glow" class="absolute w-[450px] h-[450px] bg-brand-vibe/5 blur-[150px] rounded-full opacity-0 pointer-events-none"></div>
+
+           <!-- Central Hyper-Polygonal Heart -->
+           <div class="relative w-64 h-64 z-20 perspective-mid" id="core-3d">
+              <svg class="absolute inset-0 w-full h-full animate-float-slow" viewBox="0 0 100 100">
+                <polygon points="50,2 96,25 96,75 50,98 4,75 4,25" fill="none" stroke="white" stroke-width="0.3" opacity="0.3" />
+                <path d="M50 15 L85 35 L85 65 L50 85 L15 65 L15 35 Z" fill="url(#hologram-grad)" opacity="0.2" class="mix-blend-color-dodge" />
+                <defs>
+                  <linearGradient id="hologram-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" style="stop-color:#f02aa6;stop-opacity:1" />
+                    <stop offset="100%" style="stop-color:#06b6d4;stop-opacity:1" />
+                  </linearGradient>
+                </defs>
+              </svg>
+           </div>
+
+           <!-- HUD LAYERS -->
+           <div class="absolute w-[420px] h-[420px] border border-white/5 rounded-full animate-rotate-slow"></div>
+           <div class="absolute w-[350px] h-[350px] border-[0.5px] border-dashed border-brand-vibe/40 rounded-full animate-rotate-reverse"></div>
+           
+           <div class="absolute w-[500px] h-[500px] animate-rotate-very-slow pointer-events-none">
+              <div class="absolute top-[15%] right-[15%] text-[8px] font-mono text-white/20 tracking-[0.4em] rotate-12">SEC::ALPHA_LOCK</div>
+              <div class="absolute bottom-[15%] left-[15%] text-[8px] font-mono text-white/20 tracking-[0.4em] -rotate-12">SIG::OMEGA_DECODE</div>
+           </div>
+
+           <div class="absolute w-full h-full animate-radar-scan bg-gradient-to-b from-brand-vibe/5 to-transparent pointer-events-none opacity-20"></div>
+        </div>
+      </div>
+
+      <!-- FILTER SYSTEM (REVERTED TO SOPHISTICATED SCALE) -->
+      <div class="flex flex-col xl:flex-row justify-between items-start xl:items-center gap-8 mb-20 border-b border-white/10 pb-12">
+        <div class="flex flex-wrap gap-4">
+          {mockCategories.map((cat) => (
+            <button 
+              class="category-filter px-8 py-3 rounded-full glass-btn text-[10px] font-black uppercase tracking-widest transition-all duration-500 border border-white/10 group relative overflow-hidden"
+              data-category={cat}
+            >
+              <span class="relative z-10 group-hover:text-white transition-colors">{cat}</span>
+              <div class="absolute inset-0 bg-gradient-to-tr from-brand-vibe to-indigo-600 translate-y-[100%] group-hover:translate-y-0 transition-transform duration-500 -z-0"></div>
+            </button>
+          ))}
+        </div>
+        
+        <div class="flex items-center gap-6 p-2 bg-slate-950/60 rounded-full border border-white/5 backdrop-blur-3xl group">
+          <div class="px-6 py-2 text-[10px] font-black text-white/30 uppercase tracking-[0.2em] border-r border-white/5 group-hover:text-brand-cyan transition-colors">
+            ORDENAR
+          </div>
+          <div class="flex gap-2 pr-4">
+            {filterLevels.map((level) => (
+              <button 
+                class="level-filter px-7 py-2 rounded-full text-[9px] font-black uppercase tracking-widest transition-all hover:text-white"
+                data-level={level.id}
+              >
+                {level.label}
+              </button>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <!-- GRID -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-14" id="insights-grid">
+        {sortedInsights.map((insight, i) => (
+          <div class="insight-item card-entrance" style={`--delay: ${i * 100}ms`} data-category={insight.category} data-time={insight.time}>
+            <InsightCard insight={insight} />
+          </div>
+        ))}
+      </div>
+    </section>
+  </main>
+
+  <style>
+    .text-glow-vibe { text-shadow: 0 0 40px rgba(240, 42, 166, 0.4); }
+    
+    .perspective-grid {
+      background-image: 
+        linear-gradient(to right, rgba(6, 182, 212, 0.05) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(240, 42, 166, 0.05) 1px, transparent 1px);
+      background-size: 60px 60px;
+      perspective: 1200px;
+      transform: rotateX(60deg) scale(3);
+      mask-image: radial-gradient(circle at center, black, transparent 90%);
+      animation: grid-move 30s linear infinite;
+    }
+    @keyframes grid-move { from { background-position: 0 0; } to { background-position: 0 60px; } }
+
+    .glass { background: rgba(15, 23, 42, 0.5); backdrop-filter: blur(40px); }
+    .glass-btn { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(20px); }
+    
+    .level-filter { color: rgba(255,255,255,0.2); }
+    .level-filter.active { background: #f02aa6; color: white; box-shadow: 0 0 15px rgba(240, 42, 166, 0.4); }
+
+    .card-entrance { opacity: 0; animation: slideInUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards; animation-delay: var(--delay); }
+    @keyframes slideInUp { from { opacity: 0; transform: translateY(60px) scale(0.95); } to { opacity: 1; transform: translateY(0) scale(1); } }
+    
+    /* ANIMATIONS */
+    @keyframes rotate-slow { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+    @keyframes rotate-very-slow { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+    @keyframes rotate-reverse { from { transform: rotate(360deg); } to { transform: rotate(0deg); } }
+    @keyframes float-slow { 0%, 100% { transform: translateY(0) rotate(2deg); } 50% { transform: translateY(-20px) rotate(-2deg); } }
+    @keyframes radar-scan { 0% { opacity: 0; transform: translateY(-100px); } 50% { opacity: 0.1; } 100% { opacity: 0; transform: translateY(100px); } }
+    @keyframes data-stream { 0% { transform: translateY(0); opacity: 0; } 10% { opacity: 0.8; } 90% { opacity: 0.8; } 100% { transform: translateY(-20px); opacity: 0; } }
+
+    .animate-rotate-slow { animation: rotate-slow 25s linear infinite; }
+    .animate-rotate-very-slow { animation: rotate-very-slow 50s linear infinite; }
+    .animate-rotate-reverse { animation: rotate-reverse 20s linear infinite; }
+    .animate-float-slow { animation: float-slow 8s ease-in-out infinite; }
+    .animate-radar-scan { animation: radar-scan 6s ease-in-out infinite; }
+    .animate-data-stream { animation: data-stream 2s infinite linear; }
+    
+    .perspective-mid { perspective: 1000px; transform-style: preserve-3d; }
+  </style>
+
+  <script>
+    const container = document.getElementById('parallax-container');
+    const core = document.getElementById('core-3d');
+    const glow = document.getElementById('mouse-glow');
+    const coordDisplay = document.getElementById('coord-display');
+
+    if (container && core && glow) {
+      container.addEventListener('mousemove', (e) => {
+        const { left, top, width, height } = container.getBoundingClientRect();
+        const x = (e.clientX - left) / width - 0.5;
+        const y = (e.clientY - top) / height - 0.5;
+        core.style.transform = `rotateY(${x * 50}deg) rotateX(${-y * 50}deg)`;
+        glow.style.left = `${e.clientX - left - 225}px`;
+        glow.style.top = `${e.clientY - top - 225}px`;
+        glow.style.opacity = '1';
+
+        if (coordDisplay) {
+            const mockLat = (40.4124 + y * 0.05).toFixed(4);
+            const mockLng = (3.7038 + x * 0.05).toFixed(4);
+            coordDisplay.innerText = `${mockLat}N / ${mockLng}W`;
+        }
+      });
+      container.addEventListener('mouseleave', () => {
+        core.style.transform = `rotateY(0deg) rotateX(0deg)`;
+        glow.style.opacity = '0';
+      });
+    }
+
+    const categoryButtons = document.querySelectorAll('.category-filter');
+    const levelButtons = document.querySelectorAll('.level-filter');
+    const items = document.querySelectorAll('.insight-item');
+
+    const updateUI = () => {
+      const activeCat = document.querySelector('.category-filter.active')?.getAttribute('data-category') || 'Todos';
+      const activeLevel = document.querySelector('.level-filter.active')?.getAttribute('data-level') || 'recent';
+      items.forEach((el: any) => {
+        const cat = el.getAttribute('data-category');
+        const time = el.getAttribute('data-time');
+        const match = (activeCat === 'Todos' || cat === activeCat) && (activeLevel === time);
+        el.style.display = match ? 'block' : 'none';
+      });
+    }
+    categoryButtons.forEach(b => b.addEventListener('click', () => {
+      categoryButtons.forEach(btn => btn.classList.remove('active', 'bg-brand-vibe', 'text-white'));
+      b.classList.add('active', 'bg-brand-vibe', 'text-white');
+      updateUI();
+    }));
+    levelButtons.forEach(b => b.addEventListener('click', () => {
+      levelButtons.forEach(btn => btn.classList.remove('active'));
+      b.classList.add('active');
+      updateUI();
+    }));
+    (document.querySelector('[data-category="Todos"]') as HTMLElement)?.click();
+    (document.querySelector('[data-level="recent"]') as HTMLElement)?.click();
+  </script>
+</Layout>

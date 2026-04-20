@@ -1,0 +1,72 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Contacto | CoolhuntingNow">
+  <main class="pt-32 min-h-screen flex items-center">
+    <div class="container mx-auto px-6 py-20">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-20">
+        <!-- Left Side: Info -->
+        <div>
+          <h1 class="font-outfit text-6xl md:text-8xl font-black mb-10 tracking-tighter">
+            HABLEMOS <br/> <span class="text-brand-cyan">DEL FUTURO</span>
+          </h1>
+          <p class="text-xl text-white/50 mb-12 font-light leading-relaxed">
+            Estamos listos para ayudarte a navegar la incertidumbre. Cuéntanos tu desafío y nuestro equipo prospectivo se pondrá en contacto.
+          </p>
+          
+          <div class="space-y-8">
+            <div class="flex items-center gap-6">
+              <div class="w-12 h-12 rounded-full glass flex items-center justify-center text-brand-electric">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              </div>
+              <span class="text-lg font-light">+34 900 123 456</span>
+            </div>
+            <div class="flex items-center gap-6">
+              <div class="w-12 h-12 rounded-full glass flex items-center justify-center text-brand-cyan">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+              </div>
+              <span class="text-lg font-light">contacto@coolhuntingnow.com</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Side: Form -->
+        <div class="glass p-12 rounded-[3.5rem] border-white/5 shadow-2xl">
+          <form class="space-y-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div class="space-y-3">
+                <label class="text-[10px] font-bold uppercase tracking-widest text-white/30 ml-4">Nombre Completo</label>
+                <input type="text" class="w-full bg-slate-900/50 border border-white/5 rounded-2xl px-6 py-4 focus:border-brand-cyan outline-none transition-all placeholder:text-white/10" placeholder="Ej: Elena Ruiz" />
+              </div>
+              <div class="space-y-3">
+                <label class="text-[10px] font-bold uppercase tracking-widest text-white/30 ml-4">Email Profesional</label>
+                <input type="email" class="w-full bg-slate-900/50 border border-white/5 rounded-2xl px-6 py-4 focus:border-brand-cyan outline-none transition-all placeholder:text-white/10" placeholder="elena@empresa.com" />
+              </div>
+            </div>
+            
+            <div class="space-y-3">
+              <label class="text-[10px] font-bold uppercase tracking-widest text-white/30 ml-4">Tipo de Consulta</label>
+              <select class="w-full bg-slate-900/50 border border-white/5 rounded-2xl px-6 py-4 focus:border-brand-cyan outline-none transition-all text-white/50">
+                <option>Consultoría Estratégica</option>
+                <option>Suscripción Intelligence</option>
+                <option>Conferencias / Labs</option>
+                <option>Otros</option>
+              </select>
+            </div>
+            
+            <div class="space-y-3">
+              <label class="text-[10px] font-bold uppercase tracking-widest text-white/30 ml-4">Mensaje</label>
+              <textarea rows="4" class="w-full bg-slate-900/50 border border-white/5 rounded-2xl px-6 py-4 focus:border-brand-cyan outline-none transition-all placeholder:text-white/10" placeholder="¿Cómo podemos ayudarte?"></textarea>
+            </div>
+            
+            <button type="submit" class="btn-primary w-full py-5 text-lg uppercase tracking-widest group">
+              Enviar Propuesta
+              <span class="inline-block group-hover:translate-x-2 transition-transform ml-2">→</span>
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </main>
+</Layout>

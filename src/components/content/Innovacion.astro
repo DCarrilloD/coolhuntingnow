@@ -1,0 +1,70 @@
+---
+const { data } = Astro.props;
+---
+
+<section class="py-16 relative overflow-hidden">
+    <!-- Neon Background Accents -->
+    <div class="absolute top-1/2 left-0 w-80 h-80 bg-brand-vibe/5 blur-[120px] rounded-full"></div>
+    <div class="absolute bottom-0 right-0 w-[500px] h-[500px] bg-brand-cyan/5 blur-[150px] rounded-full"></div>
+
+    <div class="container mx-auto px-6 relative z-10">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+            
+            <!-- Left: Visual Column -->
+            <div class="sticky top-32 space-y-12">
+                <div class="relative group">
+                    <div class="absolute -inset-1 bg-gradient-to-r from-brand-cyan to-brand-vibe rounded-[2rem] blur opacity-20 group-hover:opacity-40 transition duration-1000"></div>
+                    <div class="relative rounded-[2rem] overflow-hidden border border-white/20">
+                         {data.img_principal ? (
+                             <img src={data.img_principal.url} alt="Visualización de innovación" class="w-full grayscale group-hover:grayscale-0 transition-all duration-700" />
+                         ) : (
+                             <div class="h-96 bg-slate-900 flex items-center justify-center">
+                                 <span class="text-white/20 uppercase tracking-widest font-black">Media_Missing</span>
+                             </div>
+                         )}
+                    </div>
+                </div>
+
+                <!-- Innovation Metrics -->
+                <div class="grid grid-cols-2 gap-6">
+                    <div class="glass p-6 rounded-3xl border border-brand-cyan/20">
+                        <div class="text-[9px] uppercase tracking-widest text-brand-cyan mb-2">Development_State</div>
+                        <div class="text-white font-black uppercase text-sm tracking-tighter">{data.estado || 'Concept'}</div>
+                    </div>
+                    <div class="glass p-6 rounded-3xl border border-brand-vibe/20">
+                        <div class="text-[9px] uppercase tracking-widest text-brand-vibe mb-2">Disruption_Level</div>
+                        <div class="text-white font-black uppercase text-sm tracking-tighter">{data.grado_disrupcion || 'Radical'}</div>
+                    </div>
+                </div>
+
+                {data.video_demo && (
+                    <a href={data.video_demo} target="_blank" class="block w-full py-6 rounded-full border border-white/10 glass text-center font-black uppercase text-[10px] tracking-[0.4em] text-white/50 hover:text-white hover:border-brand-cyan transition-all">
+                        Ver Video Demostración ▷
+                    </a>
+                )}
+            </div>
+
+            <!-- Right: Analysis Column -->
+            <div class="space-y-12">
+                <div class="prose prose-invert max-w-none text-white/50 font-light leading-loose text-base">
+                    {data.text_principal}
+                </div>
+
+                <div class="flex flex-wrap gap-4">
+                    {data.hashtags?.split(',').map((tag: string) => (
+                        <span class="text-xs font-black text-brand-cyan/40">#{tag.trim()}</span>
+                    ))}
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<style>
+    .glass {
+        background: rgba(255, 255, 255, 0.03);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+    }
+</style>

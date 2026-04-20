@@ -1,0 +1,175 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import fetchApi from '../../lib/strapi';
+import InsightCard from '../../components/InsightCard.astro';
+
+// Componentes de Contenido Dinámico
+import EscenarioFuturo from '../../components/content/EscenarioFuturo.astro';
+import Estudio from '../../components/content/Estudio.astro';
+import Innovacion from '../../components/content/Innovacion.astro';
+import Tendencia from '../../components/content/Tendencia.astro';
+
+export async function getStaticPaths() {
+    let insights: any[] = [];
+    try {
+        insights = await fetchApi<any[]>({
+            endpoint: 'insights',
+            query: 'populate=*',
+            wrappedByKey: 'data'
+        }) || [];
+    } catch (e) {
+        console.error("Error in getStaticPaths:", e);
+        // Fallback for dev mode
+        insights = [{ 
+            title: "Insight Placeholder", 
+            slug: "placeholder", 
+            category: { name: "General" }, 
+            description: "Este es un placeholder porque el backend no está disponible.",
+            publishedAt: new Date().toISOString()
+        }];
+    }
+
+    return insights
+        .filter((insight) => insight.slug) // Solo procesar los que tengan URL válida
+        .map((insight) => ({
+            params: { slug: insight.slug },
+            props: { insight },
+        }));
+}
+
+const { insight } = Astro.props;
+
+// Fetch de contenido relacionado
+let relatedInsights: any[] = [];
+try {
+    relatedInsights = await fetchApi<any[]>({
+        endpoint: 'insights',
+        query: {
+            populate: '*',
+            'pagination[limit]': 3,
+            'filters[slug][$ne]': insight.slug,
+            sort: 'publishedAt:desc'
+        },
+        wrappedByKey: 'data'
+    }) || [];
+} catch (e) {
+    console.error("Error fetching related insights:", e);
+}
+
+
+const coverUrl = insight.coverImage?.url || 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80';
+---
+
+<Layout title={`${insight.title} | CoolhuntingNow`}>
+    <main class="pt-32 pb-40 min-h-screen bg-slate-950">
+        
+        <!-- HEADER ULTRA COMPACTO -->
+        <header class="max-w-3xl mx-auto px-6 mb-8 animate-fade-in text-center">
+            <!-- CATEGORÍA -->
+            <div class="text-brand-cyan text-[7px] font-black uppercase tracking-[0.6em] mb-4 opacity-60">
+                {insight.category?.name || 'Insight'} // {new Date(insight.publishedAt).toLocaleDateString('es-ES', { month: 'short', year: 'numeric' })}
+            </div>
+            
+            <!-- TÍTULO -->
+            <h1 class="font-outfit text-3xl md:text-4xl font-black text-white leading-tight uppercase tracking-tighter italic mb-4">
+                {insight.title}
+            </h1>
+
+            <!-- SUBTÍTULO -->
+            <p class="text-sm md:text-base text-white/40 font-light leading-relaxed max-w-2xl mx-auto italic mb-8">
+                {insight.description}
+            </p>
+
+            <!-- IMAGEN PRINCIPAL -->
+            <div class="relative w-full h-[200px] md:h-[350px] rounded-2xl overflow-hidden border border-white/5 shadow-xl mb-4">
+                <img 
+                    src={coverUrl} 
+                    alt={insight.title} 
+                    class="w-full h-full object-cover"
+                />
+            </div>
+        </header>
+
+        <!-- SEPARADOR -->
+        <div class="max-w-3xl mx-auto px-6 mb-4">
+            <div class="h-px w-full bg-white/5"></div>
+        </div>
+
+        <!-- CONTENIDO DINÁMICO (TEMPLATE ENGINE) -->
+        <div class="flex flex-col">
+            {insight.content?.map((comp: any) => {
+                const categoryName = insight.category?.name?.toLowerCase() || '';
+                
+                // Si es una tendencia, aplicamos el template de tendencia
+                if (comp.__component === 'content.tendencia' || categoryName.includes('tendencia')) {
+                    if (comp.__component === 'content.tendencia') return <Tendencia data={comp} />;
+                }
+
+                // Si es una innovación
+                if (comp.__component === 'content.innovacion' || categoryName.includes('innovacion')) {
+                  if (comp.__component === 'content.innovacion') return <Innovacion data={comp} />;
+                }
+
+                // Por defecto, si no coincide con la categoría, intentamos renderizar el bloque que sea
+                if (comp.__component === 'content.escenario-futuro') return <EscenarioFuturo data={comp} />;
+                if (comp.__component === 'content.estudio') return <Estudio data={comp} />;
+                if (comp.__component === 'content.innovacion') return <Innovacion data={comp} />;
+                if (comp.__component === 'content.tendencia') return <Tendencia data={comp} />;
+                
+                return null;
+            })}
+        </div>
+        
+        <!-- RELACIONADOS (CARRUSEL) -->
+        {relatedInsights.length > 0 && (
+            <section class="mt-40 border-t border-white/5 pt-20">
+                <div class="container mx-auto px-6">
+                    <div class="max-w-4xl mx-auto flex items-end justify-between mb-12">
+                        <div>
+                            <span class="text-[9px] font-black text-brand-cyan uppercase tracking-[0.5em] block mb-4">Continuar_Exploración</span>
+                            <h2 class="text-3xl font-black text-white uppercase italic tracking-tighter">Insights Relacionados</h2>
+                        </div>
+                        <div class="hidden md:flex gap-2">
+                             <div class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center opacity-30">←</div>
+                             <div class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center">→</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Simulación Carrusel Horizontal -->
+                    <div class="flex overflow-x-auto gap-8 pb-12 snap-x hide-scrollbar">
+                        {relatedInsights.map((rel) => (
+                            <div class="min-w-[300px] md:min-w-[400px] snap-center">
+                                <InsightCard insight={rel} />
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+        )}
+
+        <!-- FOOTER MÍNIMO -->
+        <section class="max-w-3xl mx-auto px-6 mt-20">
+            <div class="p-10 rounded-2xl border border-white/5 text-center">
+                <a href="/insights" class="text-[9px] font-black uppercase tracking-widest text-white/20 hover:text-brand-cyan transition-all">
+                    ← Volver al Hub de Inteligencia
+                </a>
+            </div>
+        </section>
+    </main>
+</Layout>
+
+<style>
+    @keyframes fade-in {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    .animate-fade-in { animation: fade-in 0.5s ease-out forwards; }
+
+    .hide-scrollbar::-webkit-scrollbar {
+        display: none;
+    }
+    .hide-scrollbar {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
+</style>

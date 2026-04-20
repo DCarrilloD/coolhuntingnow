@@ -1,0 +1,115 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Política de Privacidad | CoolhuntingNow">
+  <main class="pt-32 pb-40 min-h-screen bg-[#020617] relative overflow-hidden">
+    
+    <!-- TECH BACKGROUND -->
+    <div class="fixed inset-0 z-0 pointer-events-none">
+       <div class="absolute inset-0 bg-[url('/grid.svg')] bg-[length:60px_60px] opacity-[0.03]"></div>
+       <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[1000px] bg-brand-cyan/5 blur-[150px] rounded-full"></div>
+    </div>
+
+    <!-- Header Section -->
+    <section class="container mx-auto px-6 relative z-10 mb-24 animate-fade-in">
+       <div class="max-w-4xl mx-auto">
+          <div class="inline-flex items-center gap-3 px-4 py-2 bg-white/5 border border-white/10 rounded-full mb-8 backdrop-blur-md">
+             <span class="w-1.5 h-1.5 bg-brand-cyan rounded-full animate-pulse"></span>
+             <span class="text-[9px] font-black uppercase tracking-[0.4em] text-white/60">DATA_ENCRYPTION_ACTIVE</span>
+          </div>
+          <h1 class="font-outfit text-5xl md:text-[6rem] font-black mb-8 text-white uppercase italic tracking-tighter leading-none">POLÍTICA DE <span class="text-brand-cyan">PRIVACIDAD</span></h1>
+          <p class="text-white/30 text-lg font-light italic border-l border-white/10 pl-6">
+             Gestión de telemetría y protección de activos | Actualizado: {new Date().toLocaleDateString('es-ES', { month: 'long', year: 'numeric' })}
+          </p>
+       </div>
+    </section>
+
+    <!-- Content Body -->
+    <section class="container mx-auto px-6 relative z-10">
+       <div class="max-w-4xl mx-auto glass p-10 md:p-20 rounded-[4rem] border border-white/5 shadow-2xl space-y-20 relative overflow-hidden">
+          
+          <!-- Sec 01 -->
+          <div class="space-y-6 relative z-10">
+             <h2 class="text-xl font-black text-brand-cyan uppercase tracking-widest italic">01 // RECOPILACIÓN FILTRADA</h2>
+             <p class="text-white/50 leading-relaxed text-lg font-light">
+                En <span class="text-white font-bold">CoolhuntingNow</span>, la soberanía del usuario sobre sus datos es una prioridad técnica. Recopilamos información exclusivamente para la gestión de cuentas de acceso a inteligencia estratégica y comunicaciones directas de servicio.
+             </p>
+             <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-8">
+                <div class="p-4 bg-white/[0.02] border border-white/5 rounded-2xl flex items-center gap-4">
+                   <div class="w-2 h-2 bg-brand-cyan rounded-full"></div>
+                   <span class="text-xs text-white/40 uppercase tracking-widest">Registros de Sesión</span>
+                </div>
+                <div class="p-4 bg-white/[0.02] border border-white/5 rounded-2xl flex items-center gap-4">
+                   <div class="w-2 h-2 bg-brand-cyan rounded-full"></div>
+                   <span class="text-xs text-white/40 uppercase tracking-widest">Tokens de Acceso</span>
+                </div>
+             </div>
+          </div>
+
+          <!-- Sec 02 -->
+          <div class="space-y-6 relative z-10">
+             <h2 class="text-xl font-black text-brand-cyan uppercase tracking-widest italic">02 // ARQUITECTURA DE SEGURIDAD</h2>
+             <p class="text-white/50 leading-relaxed text-lg font-light">
+                Utilizamos el motor de contenidos <span class="text-white font-bold">Strapi</span> como núcleo de gestión de base de datos, implementando capas de seguridad avanzadas:
+             </p>
+             <ul class="space-y-4 pt-4">
+                <li class="flex gap-4 items-start">
+                   <span class="text-brand-cyan font-mono text-xs pt-1">[A]</span>
+                   <p class="text-white/40 text-sm italic">Encriptación SSL/TLS de 256 bits para todas las transmisiones de datos.</p>
+                </li>
+                <li class="flex gap-4 items-start">
+                   <span class="text-brand-cyan font-mono text-xs pt-1">[B]</span>
+                   <p class="text-white/40 text-sm italic">Sistemas de detección de intrusiones y auditoría constante de vulnerabilidades.</p>
+                </li>
+                <li class="flex gap-4 items-start">
+                   <span class="text-brand-cyan font-mono text-xs pt-1">[C]</span>
+                   <p class="text-white/40 text-sm italic">Gestión de identidad mediante tokens seguros (JWT).</p>
+                </li>
+             </ul>
+          </div>
+
+          <!-- Sec 03: RGPD -->
+          <div class="space-y-10 relative z-10">
+             <h2 class="text-xl font-black text-brand-cyan uppercase tracking-widest italic">03 // DERECHOS RGPD</h2>
+             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="p-8 bg-white/[0.02] border border-white/5 rounded-3xl hover:border-brand-cyan/20 transition-all group">
+                   <h4 class="text-white font-bold mb-3 tracking-tight group-hover:text-brand-cyan transition-colors">ACCESO Y RECTIFICACIÓN</h4>
+                   <p class="text-white/30 text-xs leading-relaxed uppercase tracking-widest">Solicitar auditoría de sus registros personales y corrección de discrepancias.</p>
+                </div>
+                <div class="p-8 bg-white/[0.02] border border-white/5 rounded-3xl hover:border-brand-cyan/20 transition-all group">
+                   <h4 class="text-white font-bold mb-3 tracking-tight group-hover:text-brand-cyan transition-colors">SUPRESIÓN / PORTABILIDAD</h4>
+                   <p class="text-white/30 text-xs leading-relaxed uppercase tracking-widest">Derecho al borrado total de huella digital y transferencia a otros sistemas.</p>
+                </div>
+                <div class="p-8 bg-white/[0.02] border border-white/5 rounded-3xl hover:border-brand-cyan/20 transition-all group">
+                   <h4 class="text-white font-bold mb-3 tracking-tight group-hover:text-brand-cyan transition-colors">OPOSICIÓN LIMITADA</h4>
+                   <p class="text-white/30 text-xs leading-relaxed uppercase tracking-widest">Restringir el tratamiento de sus metadatos para fines analíticos secundarios.</p>
+                </div>
+                <div class="p-8 bg-white/[0.02] border border-white/5 rounded-3xl hover:border-brand-cyan/20 transition-all group">
+                   <h4 class="text-white font-bold mb-3 tracking-tight group-hover:text-brand-cyan transition-colors">REVOCACIÓN DE CLAVES</h4>
+                   <p class="text-white/30 text-xs leading-relaxed uppercase tracking-widest">Retirar consentimientos otorgados en cualquier nodo temporal del servicio.</p>
+                </div>
+             </div>
+          </div>
+
+          <div class="pt-20 border-t border-white/5 flex flex-col md:flex-row gap-10 items-center">
+             <div class="w-16 h-16 bg-brand-cyan/10 rounded-full flex items-center justify-center border border-brand-cyan/20">
+                <span class="text-brand-cyan font-mono font-bold text-sm">EU</span>
+             </div>
+             <p class="text-white/30 text-[11px] leading-relaxed uppercase tracking-widest flex-1">
+                La gestión de privacidad cumple con el Reglamento (UE) 2016/679. Los datos se conservan durante un máximo de 12 meses tras el último acceso activo.
+             </p>
+          </div>
+
+          <!-- Decorative ID -->
+          <span class="absolute -bottom-10 -right-10 text-[10rem] font-black text-white/[0.02] select-none pointer-events-none italic">PRIVACY</span>
+       </div>
+    </section>
+  </main>
+</Layout>
+
+<style>
+  .glass { background: rgba(15, 23, 42, 0.4); backdrop-filter: blur(40px); -webkit-backdrop-filter: blur(40px); }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  .animate-fade-in { animation: fadeIn 1.5s ease-out forwards; }
+</style>

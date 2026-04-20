@@ -1,0 +1,200 @@
+---
+import Layout from '../layouts/Layout.astro';
+import fetchApi from '../lib/strapi';
+
+// Intentamos obtener los datos de Strapi
+let methodologyData: any = null;
+try {
+  methodologyData = await fetchApi<any>({
+    endpoint: 'metodologia',
+    query: 'populate=steps',
+    wrappedByKey: 'data'
+  });
+} catch (e) {
+  console.error("Error fetching methodology:", e);
+}
+
+// Valores por defecto (fallback) si no hay datos en Strapi
+const heroTitle = methodologyData?.heroTitle || "METODOLOGÍA <span class='text-brand-cyan'>COOLHUNTING</span>";
+const heroSubtitle = methodologyData?.heroSubtitle || "Un ecosistema de inteligencia diseñado para descodificar el futuro y transformarlo en <span class='text-white font-bold italic tracking-wider'>ventaja competitiva</span>.";
+const philosophyTitle = methodologyData?.philosophyTitle || "Inteligencia Anticipatoria";
+
+const defaultSteps = [
+  {
+    id: "01",
+    phase: "PHASE_01",
+    title: "DETECTION",
+    subtitle: "Horizon Scanning & Signals",
+    description: "Identificamos señales débiles y micro-tendencias en los márgenes de la cultura. Utilizamos herramientas de etnografía digital y análisis semiótico para capturar lo que aún no es evidente para las masas.",
+    tools: ["Digital Ethnography", "Semiotics", "Trend Radar"],
+    outcome: "Raw Signal Map",
+    color: "brand-cyan"
+  },
+  {
+    id: "02",
+    phase: "PHASE_02",
+    title: "ANALYSIS",
+    subtitle: "Contextual Processing",
+    description: "Procesamos la información detectada para encontrar patrones recurrentes. No solo vemos datos; descodificamos el 'por qué' detrás de cada comportamiento para entender el driver real del cambio.",
+    tools: ["Pattern Mapping", "Behavioral Analysis", "Cultural Drivers"],
+    outcome: "Trend Hypothesis",
+    color: "brand-electric"
+  },
+  {
+    id: "03",
+    phase: "PHASE_03",
+    title: "SYNTHESIS",
+    subtitle: "Future Scenario Mapping",
+    description: "Transformamos los hallazgos en escenarios prospectivos. Dibujamos hojas de ruta que permiten a las organizaciones visualizar múltiples futuros posibles y prepararse para la incertidumbre.",
+    tools: ["Speculative Design", "Prototyping", "Impact Analysis"],
+    outcome: "Strategic Scenarios",
+    color: "brand-vibe"
+  },
+  {
+    id: "04",
+    phase: "PHASE_04",
+    title: "STRATEGY",
+    subtitle: "Actionable Intelligence",
+    description: "El conocimiento solo tiene valor si es accionable. Traducimos la inteligencia de tendencias en decisiones estratégicas, innovación de productos y nuevas oportunidades de mercado.",
+    tools: ["Insight Activation", "Product Roadmap", "KPI Alignment"],
+    outcome: "Competitive Advantage",
+    color: "brand-mint"
+  }
+];
+
+const steps = methodologyData?.steps?.length > 0 ? methodologyData.steps : defaultSteps;
+---
+
+<Layout title="Metodología | CoolhuntingNow">
+  <main class="pt-32 pb-40 min-h-screen bg-[#020617] relative overflow-hidden">
+    
+    <!-- TECH BACKGROUND ELEMENTS -->
+    <div class="fixed inset-0 z-0 pointer-events-none">
+       <div class="absolute inset-0 bg-[url('/grid.svg')] bg-[length:60px_60px] opacity-[0.03]"></div>
+       
+       <!-- RADAR SCANNER -->
+       <div class="absolute top-[-20%] left-[-10%] w-[1000px] h-[1000px] border border-white/5 rounded-full"></div>
+       <div class="absolute top-[-20%] left-[-10%] w-[1000px] h-[1000px] bg-gradient-to-tr from-brand-cyan/0 via-brand-cyan/5 to-transparent rounded-full animate-radar-sweep"></div>
+
+       <!-- PARTICLES -->
+       <div class="absolute top-[20%] right-[10%] w-1 h-1 bg-brand-cyan rounded-full animate-pulse blur-[1px]"></div>
+       <div class="absolute top-[50%] left-[5%] w-1 h-1 bg-brand-vibe rounded-full animate-pulse delay-500 blur-[1px]"></div>
+    </div>
+
+    <section class="container mx-auto px-6 relative z-10">
+      
+      <!-- HERO SECTION -->
+      <div class="max-w-4xl mb-40">
+        <div class="inline-flex items-center gap-3 px-4 py-2 bg-white/5 border border-white/10 rounded-full mb-8 backdrop-blur-md">
+           <span class="w-1.5 h-1.5 bg-brand-cyan rounded-full animate-ping"></span>
+           <span class="text-[9px] font-black uppercase tracking-[0.4em] text-white/60">INTELLIGENCE_PROTOCOL_v5.0</span>
+        </div>
+        <h1 class="font-outfit text-6xl md:text-[8rem] font-black mb-8 tracking-tighter leading-[0.8] text-white uppercase italic" set:html={heroTitle} />
+        <p class="text-xl md:text-2xl text-white/40 font-light leading-relaxed max-w-2xl border-l border-white/20 pl-8" set:html={heroSubtitle} />
+      </div>
+
+      <!-- METHODOLOGY FLOW -->
+      <div class="relative">
+        <!-- Vertical Connectivity Line (Desktop Only) -->
+        <div class="hidden lg:block absolute left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-brand-cyan via-brand-vibe to-brand-mint opacity-20"></div>
+
+        <div class="grid grid-cols-1 gap-32">
+          {steps.map((step, i) => (
+            <div class={`flex flex-col ${i % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'} items-center gap-12 lg:gap-24 relative group`}>
+              
+              <!-- STEP CARD -->
+              <div class="lg:w-1/2 w-full perspective-1000">
+                <div class="glass p-10 md:p-14 rounded-[3rem] border border-white/5 bg-gradient-to-br from-slate-900/60 to-black/80 transition-all duration-700 group-hover:border-white/20 group-hover:translate-z-10 relative overflow-hidden group-hover:shadow-[0_0_50px_rgba(255,255,255,0.05)]">
+                   
+                   <!-- Phase Indicator -->
+                   <div class="flex items-center gap-4 mb-10">
+                      <div class={`px-3 py-1 rounded-md text-[10px] font-black tracking-widest border border-white/10 text-white/40 uppercase bg-white/5`}>
+                         {step.phase || `PHASE_0${i+1}`}
+                      </div>
+                      <div class="h-px flex-1 bg-white/10"></div>
+                   </div>
+
+                   <h3 class="font-outfit text-4xl md:text-5xl font-black mb-6 tracking-tighter text-white uppercase italic leading-none">{step.title}</h3>
+                   <span class="text-brand-cyan text-[10px] font-black uppercase tracking-[0.3em] mb-8 block">{step.subtitle}</span>
+                   
+                   <p class="text-lg text-white/50 font-light leading-relaxed mb-12 italic">"{step.description}"</p>
+
+                   <!-- TECH SPECS GRID -->
+                   <div class="grid grid-cols-2 gap-6 border-t border-white/5 pt-10">
+                      <div>
+                         <span class="block text-[9px] font-black text-white/30 uppercase tracking-widest mb-3">TOOLS_USED</span>
+                         <div class="flex flex-wrap gap-2">
+                            {step.tools?.map(tool => (
+                               <span class="px-2 py-1 bg-white/5 text-[9px] text-white/50 uppercase rounded border border-white/5">{tool}</span>
+                            ))}
+                         </div>
+                      </div>
+                      <div>
+                         <span class="block text-[9px] font-black text-white/30 uppercase tracking-widest mb-3">DELIVERABLE</span>
+                         <span class="text-white font-bold text-xs uppercase tracking-tighter italic">{step.outcome}</span>
+                      </div>
+                   </div>
+
+                   <!-- BACKGROUND NUMBER -->
+                   <span class="absolute -top-10 -right-10 text-[15rem] font-black text-white/[0.02] select-none pointer-events-none group-hover:text-white/[0.04] transition-colors">{step.id}</span>
+                </div>
+              </div>
+
+              <!-- CONNECTIVE DOT (Desktop) -->
+              <div class="hidden lg:flex absolute left-1/2 -translate-x-1/2 w-16 h-16 bg-[#020617] items-center justify-center z-20">
+                 <div class={`w-4 h-4 rounded-full border-2 border-white/20 group-hover:scale-150 transition-transform duration-500 bg-[#020617]`}>
+                    <div class={`w-full h-full rounded-full animate-ping opacity-20 ${
+                      i === 0 ? 'bg-brand-cyan' : i === 1 ? 'bg-brand-electric' : i === 2 ? 'bg-brand-vibe' : 'bg-brand-mint'
+                    }`}></div>
+                 </div>
+              </div>
+
+              <!-- DECORATIVE ELEMENT / ILLUSTRATION -->
+              <div class="lg:w-1/2 hidden lg:flex justify-center">
+                 <div class="relative w-64 h-64 opacity-20 group-hover:opacity-60 transition-opacity duration-1000">
+                    <div class={`absolute inset-0 border border-white/10 rounded-full animate-spin-slow`}></div>
+                    <div class="absolute inset-8 border border-white/5 rounded-full animate-reverse-spin"></div>
+                    <div class="absolute inset-0 flex items-center justify-center">
+                       <div class={`w-2 h-2 rounded-full ${
+                          i === 0 ? 'bg-brand-cyan shadow-[0_0_20px_#06b6d4]' : 
+                          i === 1 ? 'bg-brand-electric shadow-[0_0_20px_#2563eb]' : 
+                          i === 2 ? 'bg-brand-vibe shadow-[0_0_20px_#8b5cf6]' : 
+                          'bg-brand-mint shadow-[0_0_20px_#10b981]'
+                       }`}></div>
+                    </div>
+                 </div>
+              </div>
+
+            </div>
+          ))}
+        </div>
+      </div>
+
+    </section>
+  </main>
+</Layout>
+
+<style>
+  @keyframes radar-sweep {
+    from { transform: translate(-50%, -50%) rotate(0deg); }
+    to { transform: translate(-50%, -50%) rotate(360deg); }
+  }
+  .animate-radar-sweep { animation: radar-sweep 12s linear infinite; }
+
+  @keyframes spin-slow {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+  .animate-spin-slow { animation: spin-slow 15s linear infinite; }
+
+  @keyframes reverse-spin {
+    from { transform: rotate(360deg); }
+    to { transform: rotate(0deg); }
+  }
+  .animate-reverse-spin { animation: reverse-spin 20s linear infinite; }
+
+  .perspective-1000 { perspective: 1000px; }
+  .translate-z-10 { transform: translateZ(50px); }
+
+  .glass { background: rgba(15, 23, 42, 0.4); backdrop-filter: blur(40px); -webkit-backdrop-filter: blur(40px); }
+</style>

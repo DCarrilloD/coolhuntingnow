@@ -1,0 +1,100 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Aviso Legal | CoolhuntingNow">
+  <main class="pt-32 pb-40 min-h-screen bg-[#020617] relative overflow-hidden">
+    
+    <!-- TECH BACKGROUND -->
+    <div class="fixed inset-0 z-0 pointer-events-none">
+       <div class="absolute inset-0 bg-[url('/grid.svg')] bg-[length:60px_60px] opacity-[0.03]"></div>
+       <div class="absolute bottom-0 left-0 w-[600px] h-[600px] bg-brand-cyan/5 blur-[100px] rounded-full"></div>
+    </div>
+
+    <!-- Header -->
+    <section class="container mx-auto px-6 relative z-10 mb-24 animate-fade-in">
+       <div class="max-w-4xl mx-auto">
+          <div class="inline-flex items-center gap-3 px-4 py-2 bg-white/5 border border-white/10 rounded-full mb-8 backdrop-blur-md">
+             <span class="w-1.5 h-1.5 bg-brand-cyan rounded-full animate-pulse"></span>
+             <span class="text-[9px] font-black uppercase tracking-[0.4em] text-white/60">LEGAL_IDENTITY_RECORD</span>
+          </div>
+          <h1 class="font-outfit text-5xl md:text-[6rem] font-black mb-8 text-white uppercase italic tracking-tighter leading-none">AVISO <span class="text-brand-cyan">LEGAL</span></h1>
+          <p class="text-white/30 text-lg font-light italic border-l border-white/10 pl-6">
+             Titularidad y registro corporativo | Actualizado: {new Date().getFullYear()}
+          </p>
+       </div>
+    </section>
+
+    <!-- Content Body -->
+    <section class="container mx-auto px-6 relative z-10">
+       <div class="max-w-4xl mx-auto glass p-10 md:p-20 rounded-[4rem] border border-white/5 shadow-2xl relative overflow-hidden">
+          
+          <!-- Identity Grid -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-16 mb-20">
+             <div class="space-y-4">
+                <span class="text-[10px] font-black text-brand-cyan uppercase tracking-[0.3em]">OWNER_ENTITY</span>
+                <p class="text-3xl text-white font-bold leading-none tracking-tighter uppercase italic">
+                   Coolhunting Consulting Group Sl.
+                </p>
+             </div>
+             <div class="space-y-4">
+                <span class="text-[10px] font-black text-brand-cyan uppercase tracking-[0.3em]">TAX_IDENTIFIER</span>
+                <p class="text-3xl text-white font-mono tracking-widest bg-white/5 px-4 py-2 rounded-lg inline-block">
+                   B87226155
+                </p>
+             </div>
+          </div>
+
+          <div class="h-px bg-gradient-to-r from-white/10 to-transparent w-full mb-20"></div>
+
+          <!-- Detailed Info -->
+          <div class="space-y-16">
+             <div class="grid grid-cols-1 md:grid-cols-2 gap-y-12 gap-x-20">
+                <div class="group">
+                   <h5 class="text-white/20 text-[9px] uppercase font-black mb-4 tracking-widest border-b border-white/5 pb-2 transition-colors group-hover:text-brand-cyan">SEDE CORPORATIVA</h5>
+                   <p class="text-white/50 leading-relaxed font-light">
+                      Calle Narváez, 47 – piso 2 b<br/>
+                      Madrid, 28009, Madrid, España
+                   </p>
+                </div>
+                <div class="group">
+                   <h5 class="text-white/20 text-[9px] uppercase font-black mb-4 tracking-widest border-b border-white/5 pb-2 transition-colors group-hover:text-brand-cyan">DIRECCIÓN TÉCNICA</h5>
+                   <p class="text-white/50 leading-relaxed font-bold italic tracking-tight uppercase">
+                      Manuel Serrano Ortega
+                   </p>
+                </div>
+                <div class="group">
+                   <h5 class="text-white/20 text-[9px] uppercase font-black mb-4 tracking-widest border-b border-white/5 pb-2 transition-colors group-hover:text-brand-cyan">CANAL DE CONTACTO</h5>
+                   <a href="mailto:hola@coolhuntinguniversity.com" class="text-brand-cyan font-bold hover:text-white transition-colors block mt-2">
+                      hola@coolhuntinguniversity.com
+                   </a>
+                </div>
+                <div class="group">
+                   <h5 class="text-white/20 text-[9px] uppercase font-black mb-4 tracking-widest border-b border-white/5 pb-2 transition-colors group-hover:text-brand-cyan">ENLACE DIRECTO</h5>
+                   <a href="tel:+34619221188" class="text-white/50 font-medium hover:text-brand-cyan transition-colors block mt-2">
+                      +34 619 221 188
+                   </a>
+                </div>
+             </div>
+
+             <!-- Disclaimers (Replacing "Importante") -->
+             <div class="pt-20 border-t border-white/5">
+                <h5 class="text-white font-bold text-sm mb-6 italic">RESOLUCIÓN DE LITIGIOS</h5>
+                <p class="text-white/30 text-sm leading-relaxed font-light">
+                   Conforme a lo dispuesto en la normativa vigente, se informa que la entidad Coolhunting Consulting Group Sl. no se encuentra adherida, ni obligada a participar en procedimientos de resolución extrajudicial de conflictos ante juntas de arbitraje de consumo. Para cualquier incidencia, se recomienda el contacto directo a través de los canales oficiales habilitados en este documento.
+                </p>
+             </div>
+          </div>
+
+          <!-- Decorative ID -->
+          <span class="absolute -bottom-10 -right-10 text-[10rem] font-black text-white/[0.02] select-none pointer-events-none italic">LEGAL</span>
+       </div>
+    </section>
+  </main>
+</Layout>
+
+<style>
+  .glass { background: rgba(15, 23, 42, 0.4); backdrop-filter: blur(40px); -webkit-backdrop-filter: blur(40px); }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  .animate-fade-in { animation: fadeIn 1.5s ease-out forwards; }
+</style>
