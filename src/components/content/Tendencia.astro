@@ -38,19 +38,21 @@ const { data } = Astro.props;
                  </div>
 
                  <!-- Early Adopters -->
-                 <div class="glass p-10 rounded-3xl border border-white/5 flex flex-col justify-center items-center text-center">
-                    <div class="text-[10px] font-black uppercase tracking-[0.3em] text-white/30 mb-8">Early Adopters</div>
-                    <p class="text-sm text-white/70 font-light leading-relaxed">
-                        {data.early_adopters}
-                    </p>
-                 </div>
+                 {data.early_adopters && (
+                    <div class="glass p-10 rounded-3xl border border-white/5 flex flex-col justify-center items-center text-center">
+                       <div class="text-[10px] font-outfit font-black uppercase italic tracking-[0.3em] text-white/30 mb-8">Early Adopters</div>
+                       <p class="text-sm text-white/70 font-outfit font-light leading-relaxed italic">
+                          {data.early_adopters}
+                       </p>
+                    </div>
+                 )}
             </div>
 
             <!-- Content Area -->
-            <div class="relative">
+            <div class="relative max-w-3xl mx-auto">
                 <div class="absolute -left-12 top-0 bottom-0 w-px bg-gradient-to-b from-brand-vibe to-transparent opacity-30 hidden md:block"></div>
                 
-                <div class="prose prose-invert max-w-none text-xl text-white/70 font-light leading-loose">
+                <div class="prose prose-invert max-w-none text-xl text-white/70 font-outfit font-light leading-[1.8] tracking-tight selection:bg-brand-vibe/30">
                     <Fragment set:html={data.texto_principal} />
                 </div>
 
@@ -61,11 +63,13 @@ const { data } = Astro.props;
                 )}
             </div>
 
-            <div class="flex justify-center gap-4 text-xs font-black text-brand-vibe/50 uppercase tracking-widest">
-                {data.hashtags?.split(',').map((tag: string) => (
-                    <span>#{tag.trim()}</span>
-                ))}
-            </div>
+            {data.hashtags && (
+                <div class="flex justify-center gap-4 text-xs font-outfit font-black text-brand-vibe/50 uppercase italic tracking-[0.2em] pt-12">
+                    {data.hashtags.split(',').map((tag: string) => (
+                        <span class="hover:text-brand-vibe transition-colors cursor-default">#{tag.trim()}</span>
+                    ))}
+                </div>
+            )}
 
         </div>
     </div>

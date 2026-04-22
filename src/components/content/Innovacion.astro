@@ -27,18 +27,22 @@ const { data } = Astro.props;
 
                 <!-- Innovation Metrics -->
                 <div class="grid grid-cols-2 gap-6">
-                    <div class="glass p-6 rounded-3xl border border-brand-cyan/20">
-                        <div class="text-[9px] uppercase tracking-widest text-brand-cyan mb-2">Development_State</div>
-                        <div class="text-white font-black uppercase text-sm tracking-tighter">{data.estado || 'Concept'}</div>
-                    </div>
-                    <div class="glass p-6 rounded-3xl border border-brand-vibe/20">
-                        <div class="text-[9px] uppercase tracking-widest text-brand-vibe mb-2">Disruption_Level</div>
-                        <div class="text-white font-black uppercase text-sm tracking-tighter">{data.grado_disrupcion || 'Radical'}</div>
-                    </div>
+                    {data.estado && (
+                        <div class="glass p-6 rounded-3xl border border-brand-cyan/20">
+                            <div class="text-[9px] font-outfit font-black uppercase italic tracking-widest text-brand-cyan mb-2">Development_State</div>
+                            <div class="text-white font-outfit font-black uppercase italic text-sm tracking-tighter">{data.estado}</div>
+                        </div>
+                    )}
+                    {data.grado_disrupcion && (
+                        <div class="glass p-6 rounded-3xl border border-brand-vibe/20">
+                            <div class="text-[9px] font-outfit font-black uppercase italic tracking-widest text-brand-vibe mb-2">Disruption_Level</div>
+                            <div class="text-white font-outfit font-black uppercase italic text-sm tracking-tighter">{data.grado_disrupcion}</div>
+                        </div>
+                    )}
                 </div>
 
                 {data.video_demo && (
-                    <a href={data.video_demo} target="_blank" class="block w-full py-6 rounded-full border border-white/10 glass text-center font-black uppercase text-[10px] tracking-[0.4em] text-white/50 hover:text-white hover:border-brand-cyan transition-all">
+                    <a href={data.video_demo} target="_blank" class="block w-full py-6 rounded-full border border-white/10 glass text-center font-outfit font-black uppercase italic text-[10px] tracking-[0.3em] text-white/50 hover:text-white hover:border-brand-cyan transition-all">
                         Ver Video Demostración ▷
                     </a>
                 )}
@@ -46,15 +50,17 @@ const { data } = Astro.props;
 
             <!-- Right: Analysis Column -->
             <div class="space-y-12">
-                <div class="prose prose-invert max-w-none text-white/50 font-light leading-loose text-base">
+                <div class="prose prose-invert max-w-none text-white/60 font-outfit font-light leading-[1.8] text-lg tracking-tight">
                     {data.text_principal}
                 </div>
 
-                <div class="flex flex-wrap gap-4">
-                    {data.hashtags?.split(',').map((tag: string) => (
-                        <span class="text-xs font-black text-brand-cyan/40">#{tag.trim()}</span>
-                    ))}
-                </div>
+                {data.hashtags && (
+                    <div class="flex flex-wrap gap-4 pt-8 border-t border-white/5">
+                        {data.hashtags.split(',').map((tag: string) => (
+                            <span class="text-[10px] font-outfit font-black uppercase italic tracking-[0.2em] text-brand-cyan/40 hover:text-brand-cyan transition-colors">#{tag.trim()}</span>
+                        ))}
+                    </div>
+                )}
             </div>
 
         </div>
