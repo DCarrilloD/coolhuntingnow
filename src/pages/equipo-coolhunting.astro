@@ -86,13 +86,13 @@ const president = {
       <div class="max-w-4xl mx-auto mb-24 animate-fade-in text-center">
         <div class="inline-flex items-center gap-4 mb-8 justify-center w-full">
            <div class="h-px w-12 bg-white/10"></div>
-           <span class="text-[10px] font-black uppercase tracking-[0.5em] text-white/40">CoolhuntingNow // Team</span>
+           <span class="text-[10px] font-black uppercase tracking-[0.5em] text-white/65">CoolhuntingNow // Team</span>
            <div class="h-px w-12 bg-white/10"></div>
         </div>
         <h1 class="font-outfit text-5xl sm:text-7xl md:text-[10rem] font-black mb-8 tracking-tighter leading-[0.85] text-white italic uppercase">
           Nuestro <span class="text-brand-cyan">Equipo</span>
         </h1>
-        <p class="text-xl md:text-2xl text-white/50 font-light leading-relaxed max-w-2xl mx-auto italic">
+        <p class="text-xl md:text-2xl text-white/70 font-light leading-relaxed max-w-2xl mx-auto italic">
           Conoce a las increíbles personas que hacen todo esto posible día a día.
         </p>
       </div>
@@ -128,7 +128,7 @@ const president = {
                <div>
                  <span class="text-[11px] md:text-[13px] font-outfit font-black text-brand-electric uppercase italic tracking-[0.3em] mb-4 block">{president.role}</span>
                  <h2 class="font-outfit text-3xl sm:text-4xl md:text-7xl font-black mb-6 tracking-tighter text-white group-hover:text-glow transition-all">{president.name}</h2>
-                 <p class="text-xl text-white/50 font-light leading-relaxed mb-10" set:html={president.bio} />
+                 <p class="text-xl text-white/70 font-light leading-relaxed mb-10" set:html={president.bio} />
                  <div class="flex flex-wrap gap-4">
                     <a href={president.linkedin} target="_blank" class="btn-primary px-8 py-4 text-[11px] uppercase tracking-widest font-black inline-block">LinkedIn Profile</a>
                     <a href={president.portfolio} target="_blank" class="px-8 py-4 text-[11px] uppercase tracking-widest font-black inline-block border border-white/20 rounded-full hover:bg-white/10 hover:border-white/40 transition-all text-white">View Portfolio</a>
@@ -147,13 +147,13 @@ const president = {
                <div class="h-px w-8 bg-brand-cyan"></div>
             </div>
             <h2 class="font-outfit text-3xl sm:text-4xl md:text-7xl font-black mb-10 tracking-tighter text-white uppercase">El Ecosistema</h2>
-            <div class="space-y-6 text-white/50 border-y border-white/5 py-10 text-center">
+            <div class="space-y-6 text-white/70 border-y border-white/5 py-10 text-center">
                <p class="text-2xl font-light leading-relaxed">
                   Coolhunting Group no es solo una entidad, es un <strong class="text-white font-bold">ecosistema híbrido diseñado para descodificar el futuro</strong>. 
                </p>
-               <p class="text-xl font-light leading-relaxed max-w-4xl mx-auto text-white/30">
-                  El valor diferencial reside en un <strong class="text-brand-cyan font-bold">engranaje de inteligencia colectiva</strong> donde la investigación alimenta la formación, y la formación eleva la consultoría.
-               </p>
+                <p class="text-xl font-light leading-relaxed max-w-4xl mx-auto text-white/70">
+                   El valor diferencial reside en un <strong class="text-brand-cyan font-bold">engranaje de inteligencia colectiva</strong> donde la investigación alimenta la formación, y la formación eleva la consultoría.
+                </p>
             </div>
          </div>
          
@@ -166,7 +166,7 @@ const president = {
                      <div class="text-5xl mb-6 group-hover:scale-110 transition-all duration-500 inline-block">{entity.icon}</div>
                      <h3 class="font-outfit text-2xl font-black mb-2 group-hover:text-brand-cyan transition-colors">{entity.title}</h3>
                      <p class="text-brand-cyan text-[11px] md:text-[13px] font-outfit font-black uppercase italic tracking-[0.2em] mb-6 opacity-80">{entity.subtitle}</p>
-                     <p class="text-lg text-white/40 font-light leading-relaxed">{entity.description}</p>
+                     <p class="text-lg text-white/65 font-light leading-relaxed">{entity.description}</p>
                   </div>
                </a>
             ))}

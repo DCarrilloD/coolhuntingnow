@@ -14,7 +14,7 @@ const { data } = Astro.props;
                    <div class="p-8 border border-white/10 rounded-3xl bg-slate-950/50">
                         <div class="text-[10px] font-black uppercase tracking-widest text-brand-electric mb-6">Data_Fact_Sheet</div>
                         <h3 class="text-3xl font-black text-white mb-8 leading-tight">{data.titulo}</h3>
-                        <p class="text-white/40 text-sm font-light leading-relaxed mb-8">
+                        <p class="text-white/65 text-sm font-light leading-relaxed mb-8">
                             {data.resumen_estudio}
                         </p>
                         
@@ -31,7 +31,7 @@ const { data } = Astro.props;
                    {data.hashtags && (
                        <div class="flex flex-wrap gap-2 pt-8 border-t border-white/5">
                            {data.hashtags.split(',').map((tag: string) => (
-                               <span class="px-4 py-2 bg-white/5 border border-white/10 rounded-full text-[9px] font-outfit font-black uppercase italic tracking-[0.1em] text-white/30 hover:text-brand-electric transition-colors cursor-default">#{tag.trim()}</span>
+                               <span class="px-4 py-2 bg-white/5 border border-white/10 rounded-full text-[9px] font-outfit font-black uppercase italic tracking-[0.1em] text-white/80 hover:text-brand-electric transition-colors cursor-default">#{tag.trim()}</span>
                            ))}
                        </div>
                    )}

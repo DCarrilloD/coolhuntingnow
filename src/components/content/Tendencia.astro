@@ -14,7 +14,7 @@ const { data } = Astro.props;
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                  <!-- Adoption Level -->
                  <div class="glass p-10 rounded-3xl border border-white/5 flex flex-col items-center text-center">
-                    <div class="text-[10px] font-black uppercase tracking-[0.3em] text-white/30 mb-8">Nivel de Adopción</div>
+                    <div class="text-[10px] font-black uppercase tracking-[0.3em] text-white/80 mb-8">Nivel de Adopción</div>
                     <div class="relative w-32 h-32 flex items-center justify-center">
                         <svg class="w-full h-full -rotate-90">
                            <circle cx="64" cy="64" r="60" stroke="currentColor" stroke-width="8" fill="transparent" class="text-white/5" />
@@ -26,7 +26,7 @@ const { data } = Astro.props;
 
                  <!-- Social Sentiment -->
                  <div class="glass p-10 rounded-3xl border border-white/5 flex flex-col items-center text-center">
-                    <div class="text-[10px] font-black uppercase tracking-[0.3em] text-white/30 mb-8">Sentimiento Social</div>
+                    <div class="text-[10px] font-black uppercase tracking-[0.3em] text-white/80 mb-8">Sentimiento Social</div>
                     <div class="flex-1 flex items-center justify-center">
                         <div class="text-4xl font-black text-white uppercase tracking-tighter italic">
                             {data.sentimiento_social || 'Neutral'}
@@ -40,7 +40,7 @@ const { data } = Astro.props;
                  <!-- Early Adopters -->
                  {data.early_adopters && (
                     <div class="glass p-10 rounded-3xl border border-white/5 flex flex-col justify-center items-center text-center">
-                       <div class="text-[10px] font-outfit font-black uppercase italic tracking-[0.3em] text-white/30 mb-8">Early Adopters</div>
+                       <div class="text-[10px] font-outfit font-black uppercase italic tracking-[0.3em] text-white/80 mb-8">Early Adopters</div>
                        <p class="text-sm text-white/70 font-outfit font-light leading-relaxed italic">
                           {data.early_adopters}
                        </p>

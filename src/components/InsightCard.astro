@@ -8,7 +8,7 @@ const getTagColor = (cat) => {
     case 'Estudios': return 'text-brand-cyan border-brand-cyan/30 bg-brand-cyan/5';
     case 'Innovaciones': return 'text-brand-electric border-brand-electric/30 bg-brand-electric/5';
     case 'Tendencias': return 'text-amber-400 border-amber-400/30 bg-amber-400/5';
-    default: return 'text-white/60 border-white/10 bg-white/5';
+    default: return 'text-white/80 border-white/10 bg-white/5';
   }
 };
 
@@ -46,12 +46,12 @@ const tagStyles = getTagColor(insight.category);
         </h3>
     </a>
     
-    <p class="text-white/40 font-light leading-relaxed mb-10 line-clamp-2 text-lg">
+    <p class="text-white/65 font-light leading-relaxed mb-10 line-clamp-2 text-lg">
       {insight.description}
     </p>
     
     <div class="pt-8 border-t border-white/5 flex items-center justify-between">
-      <div class="text-[9px] font-black text-white/20 uppercase tracking-widest italic">
+      <div class="text-[9px] font-black text-white/70 uppercase tracking-widest italic">
         Report_Data: {insight.date}
       </div>
       

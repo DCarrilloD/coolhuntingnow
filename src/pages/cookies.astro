@@ -19,7 +19,7 @@ import Layout from '../layouts/Layout.astro';
              <span class="text-[9px] font-black uppercase tracking-[0.4em] text-white/60">PRIVACY_PROTOCOL_v2.0</span>
           </div>
           <h1 class="font-outfit text-3xl sm:text-4xl md:text-[6rem] font-black mb-8 text-white uppercase italic tracking-tighter leading-none">POLÍTICA DE <span class="text-brand-cyan">COOKIES</span></h1>
-          <p class="text-white/30 text-lg font-light italic border-l border-white/10 pl-6">
+          <p class="text-white/60 text-lg font-light italic border-l border-white/10 pl-6">
              Auditoría técnica realizada el {new Date().toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' })}.
           </p>
        </div>
@@ -31,7 +31,7 @@ import Layout from '../layouts/Layout.astro';
           
           <div class="space-y-6 relative z-10">
              <h2 class="text-xl font-black text-brand-cyan uppercase tracking-widest italic">01 // NATURALEZA TÉCNICA</h2>
-             <p class="text-white/50 leading-relaxed text-lg font-light">
+             <p class="text-white/70 leading-relaxed text-lg font-light">
                 Utilizamos cookies de telemetría mínima y almacenamiento local para garantizar la integridad estructural de la plataforma. Estos archivos permiten que el núcleo de <span class="text-white font-bold">CoolhuntingNow</span> reconozca sus preferencias de acceso y optimice la entrega de inteligencia visual.
              </p>
           </div>
@@ -39,13 +39,13 @@ import Layout from '../layouts/Layout.astro';
           <!-- Types Section -->
           <div class="space-y-10 relative z-10">
              <div class="h-px w-full bg-gradient-to-r from-brand-cyan/40 to-transparent"></div>
-             <h2 class="text-xs font-black text-white/30 uppercase tracking-[0.5em]">ARQUITECTURA DE DATOS</h2>
+             <h2 class="text-xs font-black text-white/60 uppercase tracking-[0.5em]">ARQUITECTURA DE DATOS</h2>
              
              <div class="grid grid-cols-1 gap-8">
                 <!-- Essential -->
                 <div class="flex flex-col md:flex-row gap-8 items-start group">
                    <div class="w-24 text-brand-cyan font-black text-[10px] uppercase pt-2 tracking-tighter border-l-2 border-brand-cyan pl-4">NECESARIAS</div>
-                   <div class="flex-1 text-white/40 font-light group-hover:text-white/60 transition-colors">
+                   <div class="flex-1 text-white/65 font-light group-hover:text-white/60 transition-colors">
                       Esenciales para la autenticación y seguridad. Gestionan la sesión del usuario a través de nuestro motor <span class="text-white/60">Strapi</span>. No pueden ser desactivadas ya que el sistema no funcionaría sin ellas.
                    </div>
                 </div>
@@ -53,7 +53,7 @@ import Layout from '../layouts/Layout.astro';
                 <!-- Functional -->
                 <div class="flex flex-col md:flex-row gap-8 items-start group">
                    <div class="w-24 text-brand-cyan font-black text-[10px] uppercase pt-2 tracking-tighter border-l-2 border-white/10 pl-4 group-hover:border-brand-cyan transition-all">FUNCIONALES</div>
-                   <div class="flex-1 text-white/40 font-light group-hover:text-white/60 transition-colors">
+                   <div class="flex-1 text-white/65 font-light group-hover:text-white/60 transition-colors">
                       Optimizan la carga de activos multimedia a través de la red de entrega de contenidos <span class="text-white/60">Cloudinary</span>. Aseguran que las imágenes de alta resolución se entreguen de forma eficiente según su dispositivo.
                    </div>
                 </div>
@@ -68,13 +68,13 @@ import Layout from '../layouts/Layout.astro';
                    <h4 class="text-white font-bold mb-3 flex items-center gap-3">
                       <span class="w-1.5 h-1.5 bg-brand-cyan rounded-full shadow-[0_0_10px_#06b6d4]"></span> STRAPI_CORE
                    </h4>
-                   <p class="text-white/40 text-[11px] leading-relaxed uppercase tracking-wider">Control de sesión persistente e identificación de tokens de seguridad (JWT).</p>
+                   <p class="text-white/65 text-[11px] leading-relaxed uppercase tracking-wider">Control de sesión persistente e identificación de tokens de seguridad (JWT).</p>
                 </div>
                 <div class="p-8 rounded-3xl bg-white/[0.02] border border-white/5 hover:border-brand-cyan/30 transition-all">
                    <h4 class="text-white font-bold mb-3 flex items-center gap-3">
                       <span class="w-1.5 h-1.5 bg-brand-cyan rounded-full shadow-[0_0_10px_#06b6d4]"></span> CLOUDINARY_MEDIA
                    </h4>
-                   <p class="text-white/40 text-[11px] leading-relaxed uppercase tracking-wider">Optimización dinámica de activos visuales y almacenamiento en caché temporal.</p>
+                   <p class="text-white/65 text-[11px] leading-relaxed uppercase tracking-wider">Optimización dinámica de activos visuales y almacenamiento en caché temporal.</p>
                 </div>
              </div>
           </div>
@@ -82,7 +82,7 @@ import Layout from '../layouts/Layout.astro';
           <div class="p-10 rounded-[2.5rem] bg-brand-cyan/5 border border-brand-cyan/10 relative overflow-hidden">
              <div class="absolute -top-10 -right-10 w-40 h-40 bg-brand-cyan/10 blur-[80px] rounded-full"></div>
              <h2 class="text-white font-bold mb-4 italic tracking-tight">PROTECCIÓN DE PRIVACIDAD</h2>
-             <p class="text-white/50 text-sm leading-relaxed">
+             <p class="text-white/70 text-sm leading-relaxed">
                 Usted puede configurar su terminal para que le avise de la recepción de cookies y para impedir su instalación. La desactivación de cookies técnicas puede limitar el acceso a áreas restringidas del portal.
              </p>
           </div>

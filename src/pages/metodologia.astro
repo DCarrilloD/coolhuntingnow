@@ -90,7 +90,7 @@ const steps = methodologyData?.steps?.length > 0 ? methodologyData.steps : defau
            <span class="text-[9px] font-outfit font-black uppercase italic tracking-[0.4em] text-white/60">INTELLIGENCE_PROTOCOL_v5.0</span>
         </div>
         <h1 class="font-outfit text-5xl sm:text-7xl md:text-[11rem] font-black mb-8 tracking-tighter leading-[0.85] text-white uppercase italic" set:html={heroTitle} />
-        <p class="text-xl md:text-2xl text-white/40 font-outfit font-light leading-relaxed max-w-2xl border-l border-white/20 pl-8 italic" set:html={heroSubtitle} />
+        <p class="text-xl md:text-2xl text-white/65 font-outfit font-light leading-relaxed max-w-2xl border-l border-white/20 pl-8 italic" set:html={heroSubtitle} />
       </div>
 
       <!-- METHODOLOGY FLOW -->
@@ -113,7 +113,7 @@ const steps = methodologyData?.steps?.length > 0 ? methodologyData.steps : defau
                    
                    <!-- Phase Indicator -->
                    <div class="flex items-center gap-4 mb-10">
-                      <div class={`px-3 py-1 rounded-md text-[10px] font-outfit font-black tracking-[0.2em] border border-white/10 text-white/40 uppercase italic bg-white/5`}>
+                      <div class={`px-3 py-1 rounded-md text-[10px] font-outfit font-black tracking-[0.2em] border border-white/10 text-white/65 uppercase italic bg-white/5`}>
                          {step.phase || `PHASE_0${i+1}`}
                       </div>
                       <div class="h-px flex-1 bg-white/10"></div>
@@ -122,20 +122,20 @@ const steps = methodologyData?.steps?.length > 0 ? methodologyData.steps : defau
                    <h3 class="font-outfit text-4xl md:text-5xl font-black mb-6 tracking-tighter text-white uppercase italic leading-none">{step.title}</h3>
                    <span class="text-brand-cyan text-[10px] font-outfit font-black uppercase italic tracking-[0.3em] mb-8 block">{step.subtitle}</span>
                    
-                   <p class="text-lg text-white/50 font-light leading-relaxed mb-12 italic">"{step.description}"</p>
+                   <p class="text-lg text-white/70 font-light leading-relaxed mb-12 italic">"{step.description}"</p>
 
                     <!-- TECH SPECS GRID -->
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 border-t border-white/5 pt-10">
                        <div>
-                          <span class="block text-[9px] font-outfit font-black text-white/30 uppercase italic tracking-[0.2em] mb-3">TOOLS_USED</span>
+                          <span class="block text-[9px] font-outfit font-black text-white/60 uppercase italic tracking-[0.2em] mb-3">TOOLS_USED</span>
                           <div class="flex flex-wrap gap-2">
                              {step.tools?.map(tool => (
-                                <span class="px-2 py-1 bg-white/5 text-[9px] font-outfit font-bold text-white/50 uppercase italic rounded border border-white/5">{tool}</span>
+                                <span class="px-2 py-1 bg-white/5 text-[9px] font-outfit font-bold text-white/70 uppercase italic rounded border border-white/5">{tool}</span>
                              ))}
                           </div>
                        </div>
                        <div>
-                          <span class="block text-[9px] font-outfit font-black text-white/30 uppercase italic tracking-[0.2em] mb-3">DELIVERABLE</span>
+                          <span class="block text-[9px] font-outfit font-black text-white/60 uppercase italic tracking-[0.2em] mb-3">DELIVERABLE</span>
                           <span class="text-white font-outfit font-black text-xs uppercase tracking-[0.1em] italic">{step.outcome}</span>
                        </div>
                     </div>
