@@ -12,20 +12,25 @@ const { data } = Astro.props;
 
             <!-- Left: Visual Column -->
             <div class="sm:sticky sm:top-32 space-y-12">
-                <div class="relative group">
-                    <div class="absolute -inset-1 bg-gradient-to-r from-brand-cyan to-brand-vibe rounded-[2rem] blur opacity-20 group-hover:opacity-40 transition duration-1000"></div>
-                    <div class="relative rounded-[2rem] overflow-hidden border border-white/20">
-                         {data.img_principal ? (
-                             <img src={data.img_principal.url} alt="Visualización de innovación" class="w-full grayscale group-hover:grayscale-0 transition-all duration-700" />
-                         ) : (
-                             <div class="h-96 bg-slate-900 flex items-center justify-center">
-                                 <span class="text-white/20 uppercase tracking-widest font-black">Media_Missing</span>
-                             </div>
-                         )}
+                {data.img_principal && (
+                    <div class="relative group">
+                        <div class="absolute -inset-1 bg-gradient-to-r from-brand-cyan to-brand-vibe rounded-[2rem] blur opacity-20 group-hover:opacity-40 transition duration-1000"></div>
+                        <div class="relative rounded-[2rem] overflow-hidden border border-white/20">
+                            <img src={data.img_principal.url} alt="Visualización de innovación" class="w-full grayscale group-hover:grayscale-0 transition-all duration-700" />
+                        </div>
                     </div>
-                </div>
+                )}
 
-                <!-- Innovation Metrics -->
+                {data.video_demo && (
+                    <a href={data.video_demo} target="_blank" class="block w-full py-6 rounded-full border border-white/10 glass text-center font-outfit font-black uppercase italic text-[10px] tracking-[0.3em] text-white/50 hover:text-white hover:border-brand-cyan transition-all">
+                        Ver Video Demostración ▷
+                    </a>
+                )}
+            </div>
+
+            <!-- Right: Analysis Column -->
+            <div class="space-y-12">
+                <!-- Innovation Metrics: Reubicadas -->
                 <div class="grid grid-cols-2 gap-6">
                     {data.estado && (
                         <div class="glass p-6 rounded-3xl border border-brand-cyan/20">
@@ -41,15 +46,6 @@ const { data } = Astro.props;
                     )}
                 </div>
 
-                {data.video_demo && (
-                    <a href={data.video_demo} target="_blank" class="block w-full py-6 rounded-full border border-white/10 glass text-center font-outfit font-black uppercase italic text-[10px] tracking-[0.3em] text-white/50 hover:text-white hover:border-brand-cyan transition-all">
-                        Ver Video Demostración ▷
-                    </a>
-                )}
-            </div>
-
-            <!-- Right: Analysis Column -->
-            <div class="space-y-12">
                 <div class="prose prose-invert max-w-none text-white/60 font-outfit font-light leading-[1.8] text-lg tracking-tight">
                     {data.text_principal}
                 </div>

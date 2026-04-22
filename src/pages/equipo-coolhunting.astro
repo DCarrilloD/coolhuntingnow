@@ -45,7 +45,7 @@ const team = strapiTeam?.length > 0
       name: member.name,
       role: member.role,
       specialty: member.specialty,
-      image: optimizeImage(member.image?.url)
+      image: optimizeImage(member.image?.url, 600)
     }))
   : defaultTeam;
 
@@ -64,7 +64,7 @@ const president = {
   name: globalConfig?.presidentName || "Manuel Serrano Ortega",
   role: globalConfig?.presidentRole || "President & Founding Visionary",
   bio: globalConfig?.presidentBio || "Representante legal de Coolhunting Consulting Group desde 2008. Su visión ha transformado esta plataforma en un engranaje de inteligencia colectiva estratégico líder en la industria.",
-  image: optimizeImage(globalConfig?.presidentImage?.url || "https://res.cloudinary.com/dzldevft6/image/upload/v1776365317/manuel_By_Uc_CX_A_c7d99c4ab0.png"),
+  image: optimizeImage(globalConfig?.presidentImage?.url || "https://res.cloudinary.com/dzldevft6/image/upload/v1776365317/manuel_By_Uc_CX_A_c7d99c4ab0.png", 800),
   linkedin: globalConfig?.presidentLinkedIn || "https://www.linkedin.com/in/manuelserranoortega/",
   portfolio: globalConfig?.presidentPortfolio || "http://manuelserranoortega.com/"
 };
@@ -109,7 +109,7 @@ const president = {
             </div>
             <div class="text-center px-4">
                <h3 class="font-outfit text-2xl font-black mb-2 text-white tracking-tight group-hover:text-glow transition-all">{member.name}</h3>
-               <p class="text-brand-electric text-[10px] font-black uppercase tracking-[0.1em] opacity-80">{member.specialty}</p>
+               <p class="text-brand-electric text-[11px] md:text-[13px] font-outfit font-black uppercase italic tracking-[0.2em] opacity-90">{member.specialty}</p>
             </div>
           </div>
         ))}
@@ -126,7 +126,7 @@ const president = {
                   <div class="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black to-transparent opacity-60"></div>
                </div>
                <div>
-                 <span class="text-[10px] font-black text-brand-electric uppercase tracking-[0.4em] mb-4 block">{president.role}</span>
+                 <span class="text-[11px] md:text-[13px] font-outfit font-black text-brand-electric uppercase italic tracking-[0.3em] mb-4 block">{president.role}</span>
                  <h2 class="font-outfit text-3xl sm:text-4xl md:text-7xl font-black mb-6 tracking-tighter text-white group-hover:text-glow transition-all">{president.name}</h2>
                  <p class="text-xl text-white/50 font-light leading-relaxed mb-10" set:html={president.bio} />
                  <div class="flex flex-wrap gap-4">
@@ -152,7 +152,7 @@ const president = {
                   Coolhunting Group no es solo una entidad, es un <strong class="text-white font-bold">ecosistema híbrido diseñado para descodificar el futuro</strong>. 
                </p>
                <p class="text-xl font-light leading-relaxed max-w-4xl mx-auto text-white/30">
-                  El valor diferencial reside en un <strong class="text-brand-cyan font-bold">engranaje de intelligence colectiva</strong> donde la investigación alimenta la formación, y la formación eleva la consultoría.
+                  El valor diferencial reside en un <strong class="text-brand-cyan font-bold">engranaje de inteligencia colectiva</strong> donde la investigación alimenta la formación, y la formación eleva la consultoría.
                </p>
             </div>
          </div>
@@ -165,7 +165,7 @@ const president = {
                   <div class="relative z-10">
                      <div class="text-5xl mb-6 group-hover:scale-110 transition-all duration-500 inline-block">{entity.icon}</div>
                      <h3 class="font-outfit text-2xl font-black mb-2 group-hover:text-brand-cyan transition-colors">{entity.title}</h3>
-                     <p class="text-brand-cyan text-[10px] font-black uppercase tracking-widest mb-6 opacity-60">{entity.subtitle}</p>
+                     <p class="text-brand-cyan text-[11px] md:text-[13px] font-outfit font-black uppercase italic tracking-[0.2em] mb-6 opacity-80">{entity.subtitle}</p>
                      <p class="text-lg text-white/40 font-light leading-relaxed">{entity.description}</p>
                   </div>
                </a>

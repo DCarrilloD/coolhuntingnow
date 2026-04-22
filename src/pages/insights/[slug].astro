@@ -1,6 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import fetchApi from '../../lib/strapi';
+import fetchApi, { optimizeImage } from '../../lib/strapi';
 import InsightCard from '../../components/InsightCard.astro';
 
 // Componentes de Contenido Dinámico
@@ -62,12 +62,12 @@ const mappedRelated = relatedInsights.map(item => ({
     slug: item.slug,
     category: item.category?.name || 'General',
     description: item.description,
-    cover: item.coverImage?.url || 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80',
+    cover: optimizeImage(item.coverImage?.url, 800),
     date: new Date(item.publishedAt).toLocaleDateString('es-ES', { day: 'numeric', month: 'short', year: 'numeric' })
 }));
 
 
-const coverUrl = insight.coverImage?.url || 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80';
+const coverUrl = optimizeImage(insight.coverImage?.url, 1200);
 ---
 
 <Layout title={`${insight.title} | CoolhuntingNow`}>
