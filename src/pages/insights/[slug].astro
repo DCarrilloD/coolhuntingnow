@@ -56,6 +56,16 @@ try {
     console.error("Error fetching related insights:", e);
 }
 
+// MAPEO DE DATOS PARA LAS TARJETAS RELACIONADAS
+const mappedRelated = relatedInsights.map(item => ({
+    title: item.title,
+    slug: item.slug,
+    category: item.category?.name || 'General',
+    description: item.description,
+    cover: item.coverImage?.url || 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80',
+    date: new Date(item.publishedAt).toLocaleDateString('es-ES', { day: 'numeric', month: 'short', year: 'numeric' })
+}));
+
 
 const coverUrl = insight.coverImage?.url || 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80';
 ---
@@ -139,18 +149,26 @@ const coverUrl = insight.coverImage?.url || 'https://images.unsplash.com/photo-1
                             <h2 class="text-3xl font-black text-white uppercase italic tracking-tighter">Insights Relacionados</h2>
                         </div>
                         <div class="hidden md:flex gap-2">
-                             <div class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center opacity-30">←</div>
-                             <div class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center">→</div>
+                             <button id="prev-related" class="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center hover:bg-white hover:text-black transition-all cursor-pointer group">
+                                <span class="group-hover:-translate-x-1 transition-transform">←</span>
+                             </button>
+                             <button id="next-related" class="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center hover:bg-white hover:text-black transition-all cursor-pointer group">
+                                <span class="group-hover:translate-x-1 transition-transform">→</span>
+                             </button>
                         </div>
                     </div>
                     
-                    <!-- Carrusel Horizontal -->
-                    <div class="flex overflow-x-auto gap-8 pb-12 snap-x hide-scrollbar">
-                        {relatedInsights.map((rel) => (
-                            <div class="min-w-[320px] md:min-w-[450px] snap-center">
-                                <InsightCard insight={rel} />
-                            </div>
-                        ))}
+                    <!-- Carrusel Horizontal con Desvanecimiento -->
+                    <div class="relative group/carousel">
+                        <div id="related-container" class="flex overflow-x-auto gap-8 pb-12 snap-x hide-scrollbar scroll-smooth mask-fade-right">
+                            {mappedRelated.map((rel) => (
+                                <div class="min-w-[320px] md:min-w-[450px] snap-center">
+                                    <InsightCard insight={rel} />
+                                </div>
+                            ))}
+                            <!-- Espaciador final para evitar corte abrupto -->
+                            <div class="min-w-[100px] h-full invisible"></div>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -181,4 +199,36 @@ const coverUrl = insight.coverImage?.url || 'https://images.unsplash.com/photo-1
         -ms-overflow-style: none;
         scrollbar-width: none;
     }
+
+    .mask-fade-right {
+        mask-image: linear-gradient(to right, black 80%, transparent 100%);
+        -webkit-mask-image: linear-gradient(to right, black 80%, transparent 100%);
+    }
 </style>
+
+<script>
+    const container = document.getElementById('related-container');
+    const prevBtn = document.getElementById('prev-related');
+    const nextBtn = document.getElementById('next-related');
+
+    if (container && prevBtn && nextBtn) {
+        const scrollAmount = 480; // Aproximadamente el ancho de una carta + gap
+
+        prevBtn.addEventListener('click', () => {
+            container.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+        });
+
+        nextBtn.addEventListener('click', () => {
+            container.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+        });
+
+        // Opcional: ocultar flechas si no hay suficiente scroll
+        container.addEventListener('scroll', () => {
+            const isAtStart = container.scrollLeft === 0;
+            const isAtEnd = container.scrollLeft + container.clientWidth >= container.scrollWidth - 10;
+            
+            prevBtn.style.opacity = isAtStart ? '0.3' : '1';
+            nextBtn.style.opacity = isAtEnd ? '0.3' : '1';
+        });
+    }
+</script>
