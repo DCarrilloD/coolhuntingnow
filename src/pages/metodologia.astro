@@ -66,7 +66,7 @@ const steps = methodologyData?.steps?.length > 0 ? methodologyData.steps : defau
 ---
 
 <Layout title="Metodología | CoolhuntingNow">
-  <main class="pt-32 pb-40 min-h-screen bg-[#020617] relative overflow-hidden">
+  <main class="pt-32 pb-20 md:pb-40 min-h-screen bg-[#020617] relative overflow-hidden">
     
     <!-- TECH BACKGROUND ELEMENTS -->
     <div class="fixed inset-0 z-0 pointer-events-none">
@@ -84,13 +84,13 @@ const steps = methodologyData?.steps?.length > 0 ? methodologyData.steps : defau
     <section class="container mx-auto px-6 relative z-10">
       
       <!-- HERO SECTION -->
-      <div class="max-w-4xl mb-40">
+      <div class="max-w-4xl mb-16 md:mb-40">
         <div class="inline-flex items-center gap-3 px-4 py-2 bg-white/5 border border-white/10 rounded-full mb-8 backdrop-blur-md">
            <span class="w-1.5 h-1.5 bg-brand-cyan rounded-full animate-ping"></span>
-           <span class="text-[9px] font-black uppercase tracking-[0.4em] text-white/60">INTELLIGENCE_PROTOCOL_v5.0</span>
+           <span class="text-[9px] font-outfit font-black uppercase italic tracking-[0.4em] text-white/60">INTELLIGENCE_PROTOCOL_v5.0</span>
         </div>
-        <h1 class="font-outfit text-6xl md:text-[8rem] font-black mb-8 tracking-tighter leading-[0.8] text-white uppercase italic" set:html={heroTitle} />
-        <p class="text-xl md:text-2xl text-white/40 font-light leading-relaxed max-w-2xl border-l border-white/20 pl-8" set:html={heroSubtitle} />
+        <h1 class="font-outfit text-5xl sm:text-7xl md:text-[11rem] font-black mb-8 tracking-tighter leading-[0.85] text-white uppercase italic" set:html={heroTitle} />
+        <p class="text-xl md:text-2xl text-white/40 font-outfit font-light leading-relaxed max-w-2xl border-l border-white/20 pl-8 italic" set:html={heroSubtitle} />
       </div>
 
       <!-- METHODOLOGY FLOW -->
@@ -98,42 +98,47 @@ const steps = methodologyData?.steps?.length > 0 ? methodologyData.steps : defau
         <!-- Vertical Connectivity Line (Desktop Only) -->
         <div class="hidden lg:block absolute left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-brand-cyan via-brand-vibe to-brand-mint opacity-20"></div>
 
-        <div class="grid grid-cols-1 gap-32">
+        <div class="flex flex-col gap-0 md:gap-24 lg:gap-32 snap-y snap-mandatory md:snap-none">
           {steps.map((step, i) => (
-            <div class={`flex flex-col ${i % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'} items-center gap-12 lg:gap-24 relative group`}>
+            <div class={`flex flex-col ${i % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'} items-center gap-8 lg:gap-24 relative group snap-start snap-always min-h-[90vh] md:min-h-0 flex items-center justify-center py-20 md:py-0`}>
               
+              <!-- Conexión móvil (Línea entre cartas) -->
+              {i < steps.length - 1 && (
+                <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-px h-20 bg-gradient-to-b from-brand-cyan/40 to-transparent lg:hidden z-0"></div>
+              )}
+
               <!-- STEP CARD -->
-              <div class="lg:w-1/2 w-full perspective-1000">
+              <div class="lg:w-1/2 w-full perspective-1000 z-10">
                 <div class="glass p-10 md:p-14 rounded-[3rem] border border-white/5 bg-gradient-to-br from-slate-900/60 to-black/80 transition-all duration-700 group-hover:border-white/20 group-hover:translate-z-10 relative overflow-hidden group-hover:shadow-[0_0_50px_rgba(255,255,255,0.05)]">
                    
                    <!-- Phase Indicator -->
                    <div class="flex items-center gap-4 mb-10">
-                      <div class={`px-3 py-1 rounded-md text-[10px] font-black tracking-widest border border-white/10 text-white/40 uppercase bg-white/5`}>
+                      <div class={`px-3 py-1 rounded-md text-[10px] font-outfit font-black tracking-[0.2em] border border-white/10 text-white/40 uppercase italic bg-white/5`}>
                          {step.phase || `PHASE_0${i+1}`}
                       </div>
                       <div class="h-px flex-1 bg-white/10"></div>
                    </div>
 
                    <h3 class="font-outfit text-4xl md:text-5xl font-black mb-6 tracking-tighter text-white uppercase italic leading-none">{step.title}</h3>
-                   <span class="text-brand-cyan text-[10px] font-black uppercase tracking-[0.3em] mb-8 block">{step.subtitle}</span>
+                   <span class="text-brand-cyan text-[10px] font-outfit font-black uppercase italic tracking-[0.3em] mb-8 block">{step.subtitle}</span>
                    
                    <p class="text-lg text-white/50 font-light leading-relaxed mb-12 italic">"{step.description}"</p>
 
-                   <!-- TECH SPECS GRID -->
-                   <div class="grid grid-cols-2 gap-6 border-t border-white/5 pt-10">
-                      <div>
-                         <span class="block text-[9px] font-black text-white/30 uppercase tracking-widest mb-3">TOOLS_USED</span>
-                         <div class="flex flex-wrap gap-2">
-                            {step.tools?.map(tool => (
-                               <span class="px-2 py-1 bg-white/5 text-[9px] text-white/50 uppercase rounded border border-white/5">{tool}</span>
-                            ))}
-                         </div>
-                      </div>
-                      <div>
-                         <span class="block text-[9px] font-black text-white/30 uppercase tracking-widest mb-3">DELIVERABLE</span>
-                         <span class="text-white font-bold text-xs uppercase tracking-tighter italic">{step.outcome}</span>
-                      </div>
-                   </div>
+                    <!-- TECH SPECS GRID -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 border-t border-white/5 pt-10">
+                       <div>
+                          <span class="block text-[9px] font-outfit font-black text-white/30 uppercase italic tracking-[0.2em] mb-3">TOOLS_USED</span>
+                          <div class="flex flex-wrap gap-2">
+                             {step.tools?.map(tool => (
+                                <span class="px-2 py-1 bg-white/5 text-[9px] font-outfit font-bold text-white/50 uppercase italic rounded border border-white/5">{tool}</span>
+                             ))}
+                          </div>
+                       </div>
+                       <div>
+                          <span class="block text-[9px] font-outfit font-black text-white/30 uppercase italic tracking-[0.2em] mb-3">DELIVERABLE</span>
+                          <span class="text-white font-outfit font-black text-xs uppercase tracking-[0.1em] italic">{step.outcome}</span>
+                       </div>
+                    </div>
 
                    <!-- BACKGROUND NUMBER -->
                    <span class="absolute -top-10 -right-10 text-[15rem] font-black text-white/[0.02] select-none pointer-events-none group-hover:text-white/[0.04] transition-colors">{step.id}</span>

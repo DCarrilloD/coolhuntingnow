@@ -71,7 +71,7 @@ const president = {
 ---
 
 <Layout title="Equipo | CoolhuntingNow">
-  <main class="pt-32 pb-40 min-h-screen bg-[#020617] relative overflow-hidden">
+  <main class="pt-32 pb-20 md:pb-40 min-h-screen bg-[#020617] relative overflow-hidden">
     
     <!-- DYNAMIC BACKGROUND -->
     <div class="fixed inset-0 z-0 pointer-events-none">
@@ -89,7 +89,7 @@ const president = {
            <span class="text-[10px] font-black uppercase tracking-[0.5em] text-white/40">CoolhuntingNow // Team</span>
            <div class="h-px w-12 bg-white/10"></div>
         </div>
-        <h1 class="font-outfit text-6xl md:text-8xl font-black mb-8 tracking-tighter leading-none text-white italic uppercase">
+        <h1 class="font-outfit text-5xl sm:text-7xl md:text-[10rem] font-black mb-8 tracking-tighter leading-[0.85] text-white italic uppercase">
           Nuestro <span class="text-brand-cyan">Equipo</span>
         </h1>
         <p class="text-xl md:text-2xl text-white/50 font-light leading-relaxed max-w-2xl mx-auto italic">
@@ -98,7 +98,7 @@ const president = {
       </div>
 
       <!-- Professional Grid -->
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-16 gap-y-24 mb-32">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8 sm:gap-x-12 lg:gap-x-16 gap-y-12 sm:gap-y-16 lg:gap-y-24 mb-16 md:mb-32">
         {team.map((member, i) => (
           <div class="group relative card-entrance" style={`--delay: ${i * 100}ms`}>
             <div class="relative w-full max-w-[240px] mx-auto mb-10 group-hover:-translate-y-4 transition-all duration-700 ease-[cubic-bezier(0.23,1,0.32,1)]">
@@ -116,18 +116,18 @@ const president = {
       </div>
 
       <!-- MANUEL SERRANO SECTION -->
-      <div class="animate-fade-in-up mb-40">
-         <div class="max-w-5xl mx-auto glass p-12 md:p-16 rounded-[4rem] border border-white/5 relative group hover:border-brand-electric/30 transition-all duration-700 bg-gradient-to-br from-slate-900/40 to-black/60 shadow-2xl overflow-hidden">
+      <div class="animate-fade-in-up mb-16 md:mb-40">
+         <div class="max-w-5xl mx-auto glass p-6 sm:p-10 md:p-16 rounded-[4rem] border border-white/5 relative group hover:border-brand-electric/30 transition-all duration-700 bg-gradient-to-br from-slate-900/40 to-black/60 shadow-2xl overflow-hidden">
             <div class="absolute inset-0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000 bg-gradient-to-r from-transparent via-white/5 to-transparent skew-x-12"></div>
             
-            <div class="relative z-10 flex flex-col lg:flex-row gap-16 items-center">
+            <div class="relative z-10 flex flex-col lg:flex-row gap-8 lg:gap-16 items-center">
                <div class="w-64 h-80 rounded-[4rem] overflow-hidden border border-white/10 bg-slate-950 relative group-hover:border-brand-electric/30 transition-all duration-1000 shrink-0">
                   <img src={president.image} alt={president.name} class="w-full h-full object-cover grayscale brightness-90 group-hover:grayscale-0 group-hover:brightness-105 transition-all duration-1000" />
                   <div class="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black to-transparent opacity-60"></div>
                </div>
                <div>
                  <span class="text-[10px] font-black text-brand-electric uppercase tracking-[0.4em] mb-4 block">{president.role}</span>
-                 <h2 class="font-outfit text-5xl md:text-7xl font-black mb-6 tracking-tighter text-white group-hover:text-glow transition-all">{president.name}</h2>
+                 <h2 class="font-outfit text-3xl sm:text-4xl md:text-7xl font-black mb-6 tracking-tighter text-white group-hover:text-glow transition-all">{president.name}</h2>
                  <p class="text-xl text-white/50 font-light leading-relaxed mb-10" set:html={president.bio} />
                  <div class="flex flex-wrap gap-4">
                     <a href={president.linkedin} target="_blank" class="btn-primary px-8 py-4 text-[11px] uppercase tracking-widest font-black inline-block">LinkedIn Profile</a>
@@ -139,14 +139,14 @@ const president = {
       </div>
 
       <!-- ECOSYSTEM SECTION -->
-      <div id="ecosistema" class="mb-40 scroll-mt-32">
+      <div id="ecosistema" class="mb-16 md:mb-40 scroll-mt-32">
          <div class="text-center mb-16 max-w-5xl mx-auto">
             <div class="inline-flex items-center gap-4 mb-6 justify-center w-full">
                <div class="h-px w-8 bg-brand-cyan"></div>
                <span class="text-[10px] font-black uppercase tracking-[0.5em] text-brand-cyan">Core Philosophy</span>
                <div class="h-px w-8 bg-brand-cyan"></div>
             </div>
-            <h2 class="font-outfit text-5xl md:text-7xl font-black mb-10 tracking-tighter text-white uppercase">El Ecosistema</h2>
+            <h2 class="font-outfit text-3xl sm:text-4xl md:text-7xl font-black mb-10 tracking-tighter text-white uppercase">El Ecosistema</h2>
             <div class="space-y-6 text-white/50 border-y border-white/5 py-10 text-center">
                <p class="text-2xl font-light leading-relaxed">
                   Coolhunting Group no es solo una entidad, es un <strong class="text-white font-bold">ecosistema híbrido diseñado para descodificar el futuro</strong>. 
@@ -157,7 +157,7 @@ const president = {
             </div>
          </div>
          
-         <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-32">
+         <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16 md:mb-32">
             {ecosystem.map((entity) => (
                <a href={entity.link} target={entity.link.startsWith('http') ? "_blank" : "_self"} class="glass relative p-10 rounded-[3.5rem] border border-white/5 group hover:border-brand-cyan/30 transition-all duration-700 hover:-translate-y-2 overflow-hidden block">
                   <div class="absolute inset-0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000 bg-gradient-to-r from-transparent via-white/5 to-transparent skew-x-12"></div>
@@ -174,8 +174,8 @@ const president = {
       </div>
 
       <!-- HARVARD PARTNERSHIP SECTION -->
-      <div class="mb-40">
-         <div class="glass p-10 md:p-16 rounded-[4rem] border border-white/10 relative overflow-hidden group bg-white/[0.02]">
+      <div class="mb-16 md:mb-40">
+         <div class="glass p-6 sm:p-10 md:p-16 rounded-[4rem] border border-white/10 relative overflow-hidden group bg-white/[0.02]">
             <div class="absolute top-0 right-0 w-64 h-64 bg-brand-vibe/10 blur-[100px] pointer-events-none"></div>
             <div class="flex flex-col lg:flex-row items-center gap-12">
                <div class="lg:w-1/3 flex justify-center">

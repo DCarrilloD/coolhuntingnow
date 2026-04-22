@@ -18,7 +18,7 @@ const tagStyles = getTagColor(insight.category);
   <!-- Subtle Glow -->
   <div class="absolute inset-0 bg-brand-vibe/0 group-hover:bg-brand-vibe/5 transition-all duration-700 pointer-events-none"></div>
 
-  <div class="relative h-80 md:h-[22rem] overflow-hidden">
+  <div class="relative h-56 sm:h-72 md:h-[22rem] overflow-hidden">
     <img 
       src={insight.cover} 
       alt={insight.title} 
@@ -30,9 +30,9 @@ const tagStyles = getTagColor(insight.category);
     <div class="absolute inset-0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000 bg-gradient-to-r from-transparent via-white/10 to-transparent skew-x-12"></div>
 
     <div class="absolute top-6 left-6">
-       <span class={`px-4 py-1.5 rounded-full border text-[9px] font-black uppercase tracking-[0.2em] backdrop-blur-md ${tagStyles}`}>
+        <span class={`px-4 py-1.5 rounded-full border text-[9px] font-outfit font-black uppercase italic tracking-[0.2em] backdrop-blur-md ${tagStyles}`}>
           {insight.category}
-       </span>
+        </span>
     </div>
   </div>
   
@@ -61,8 +61,8 @@ const tagStyles = getTagColor(insight.category);
       </div>
       
       <a href={`/insights/${insight.slug || '#'}`} class="group/btn relative inline-flex items-center gap-3 overflow-hidden">
-        <span class="text-[10px] font-black uppercase tracking-widest text-brand-vibe z-10">Read File</span>
-        <div class="w-8 h-8 rounded-full bg-brand-vibe/10 flex items-center justify-center group-hover/btn:w-24 group-hover/btn:bg-brand-vibe transition-all duration-500 overflow-hidden relative">
+        <span class="text-[10px] font-outfit font-black uppercase italic tracking-[0.2em] text-brand-vibe z-10">Read File</span>
+        <div class="w-8 h-8 rounded-full bg-brand-vibe/10 flex items-center justify-center group-hover/btn:w-24 group-active/btn:w-24 group-hover/btn:bg-brand-vibe group-active/btn:bg-brand-vibe transition-all duration-500 overflow-hidden relative">
            <span class="text-brand-vibe group-hover/btn:text-white transition-colors">↗</span>
         </div>
       </a>

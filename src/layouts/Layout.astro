@@ -45,7 +45,7 @@ const footerText = globalConfig?.footerText || "© 2026 Coolhuntingnow";
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="description" content="CoolhuntingNow - Decoding the DNA of Tomorrow" />
-		<meta name="viewport" content="width=device-width" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{title || globalConfig?.siteName || 'CoolhuntingNow'}</title>
@@ -65,8 +65,8 @@ const footerText = globalConfig?.footerText || "© 2026 Coolhuntingnow";
 		<div class="fixed inset-0 -z-50 bg-[#020617]"></div>
 		
 		<!-- Sticky Header -->
-		<header class="fixed top-0 left-0 w-full z-50 glass border-b border-white/5 bg-slate-950/40 backdrop-blur-xl">
-			<nav class="container mx-auto px-6 h-24 flex items-center justify-between">
+		<header class="fixed top-0 left-0 w-full z-[110] glass border-b border-white/5 bg-slate-950/40 backdrop-blur-xl">
+			<nav class="container mx-auto px-6 h-16 md:h-24 flex items-center justify-between">
 				<a href="/" class="flex items-center gap-2 group">
 					<!-- Dynamic Logo or Default -->
 					{globalConfig?.logo?.url ? (
@@ -80,15 +80,58 @@ const footerText = globalConfig?.footerText || "© 2026 Coolhuntingnow";
 					<span class="font-outfit text-2xl font-black tracking-[-0.05em] uppercase italic">Coolhunting<span class="text-brand-cyan">NOW</span></span>
 				</a>
 				
-				<div class="hidden md:flex items-center gap-10 font-black text-[11px] uppercase tracking-[0.25em] font-outfit">
+				<div class="hidden md:flex items-center gap-10 font-outfit font-black text-[11px] uppercase italic tracking-[0.2em]">
 					<a href="/" class="nav-link hover:text-brand-cyan transition-colors">Now</a>
 					<a href="/insights" class="nav-link hover:text-brand-vibe transition-colors">Insights</a>
 					<a href="/metodologia" class="nav-link hover:text-brand-electric transition-colors">Metodología</a>
 					<a href="/equipo-coolhunting" class="nav-link hover:text-brand-cyan transition-colors">Equipo</a>
-					<a href="/contacto" class="px-8 py-3 bg-white text-black rounded-full hover:bg-brand-cyan hover:text-white transition-all shadow-xl">Acceso</a>
+					<a href="/contacto" class="px-8 py-3 bg-white text-black rounded-full hover:bg-brand-cyan hover:text-white transition-all shadow-xl font-outfit font-black uppercase italic tracking-[0.2em] text-[11px]">Acceso</a>
 				</div>
+
+				<!-- Botón hamburguesa (solo móvil) -->
+				<button id="menu-toggle" class="md:hidden flex flex-col justify-center items-center gap-1.5 w-10 h-10 z-50 relative" aria-label="Abrir menú" aria-expanded="false">
+					<span class="menu-bar block w-6 h-0.5 bg-white transition-all duration-300 origin-center"></span>
+					<span class="menu-bar block w-6 h-0.5 bg-white transition-all duration-300"></span>
+					<span class="menu-bar block w-4 h-0.5 bg-white transition-all duration-300 self-end origin-center"></span>
+				</button>
 			</nav>
 		</header>
+
+		<!-- Drawer móvil — fuera del header para evitar que backdrop-filter cree un containing block -->
+		<div id="mobile-menu" class="fixed inset-0 z-[200] flex flex-col translate-x-full transition-transform duration-500 ease-[cubic-bezier(0.23,1,0.32,1)] md:hidden" style="background-color:#020617;background-image:none;" aria-hidden="true">
+
+			<!-- Header del drawer: altura igual al header fijo -->
+			<div class="h-16 shrink-0 border-b border-white/10 flex items-center justify-between px-6">
+				{globalConfig?.logo?.url ? (
+					<img src={globalConfig.logo.url} alt="Logo" class="h-8 w-auto object-contain" />
+				) : (
+					<span class="font-outfit text-xl font-black tracking-[-0.05em] uppercase italic text-white">Coolhunting<span class="text-brand-cyan">NOW</span></span>
+				)}
+				<button id="menu-close" class="flex flex-col justify-center items-center gap-1.5 w-10 h-10 relative" aria-label="Cerrar menú">
+					<span class="block w-6 h-0.5 bg-white rotate-45 translate-y-[4px]"></span>
+					<span class="block w-6 h-0.5 bg-white -rotate-45 -translate-y-[4px]"></span>
+				</button>
+			</div>
+
+			<!-- Links de navegación -->
+			<nav class="flex flex-col flex-1 justify-center px-8 gap-1">
+				<a href="/" class="mobile-nav-link" data-num="01">Now</a>
+				<a href="/insights" class="mobile-nav-link" data-num="02">Insights</a>
+				<a href="/metodologia" class="mobile-nav-link" data-num="03">Metodología</a>
+				<a href="/equipo-coolhunting" class="mobile-nav-link" data-num="04">Equipo</a>
+			</nav>
+
+			<!-- Footer del drawer -->
+			<div class="px-8 pb-12 shrink-0 border-t border-white/10 pt-8 flex flex-col gap-4">
+				<a href="/contacto" class="w-full px-8 py-4 bg-white text-black rounded-full font-outfit font-black uppercase italic tracking-[0.2em] text-[12px] text-center hover:bg-brand-cyan hover:text-white transition-all">Acceso</a>
+				<p class="text-center text-white/20 text-[10px] uppercase tracking-widest font-bold">Decoding the DNA of Tomorrow</p>
+			</div>
+
+			<!-- Número decorativo de fondo -->
+			<div class="absolute inset-0 flex items-center justify-center pointer-events-none select-none overflow-hidden">
+				<span id="menu-bg-num" class="text-[22rem] font-black text-white/[0.02] italic font-outfit transition-all duration-300">01</span>
+			</div>
+		</div>
 
 		<slot />
 
@@ -112,7 +155,7 @@ const footerText = globalConfig?.footerText || "© 2026 Coolhuntingnow";
 					</div>
 
 					<!-- Secondary Navigation (Main Links) -->
-					<div class="flex flex-wrap justify-center items-center gap-x-12 gap-y-6 mb-16 font-outfit text-sm font-bold uppercase tracking-[0.2em] text-white/60">
+					<div class="flex flex-wrap justify-center items-center gap-x-6 md:gap-x-12 gap-y-6 mb-16 font-outfit text-xs font-black uppercase tracking-[0.25em] text-white/40 italic">
 						<a href="https://www.coolhuntinguniversity.com/" target="_blank" class="hover:text-brand-cyan transition-colors">Programas de Coolhunting</a>
 						<span class="hidden md:block w-px h-4 bg-white/10"></span>
 						<a href="https://www.coolhuntinguniversity.com/" target="_blank" class="hover:text-brand-cyan transition-colors">Campus Online</a>
@@ -128,7 +171,7 @@ const footerText = globalConfig?.footerText || "© 2026 Coolhuntingnow";
 					</div>
 
 					<!-- Legal & Copyright -->
-					<div class="flex flex-col md:flex-row items-center gap-8">
+					<div class="flex flex-col md:flex-row items-center gap-4 md:gap-8">
 						<div class="flex gap-8 text-[10px] font-black uppercase tracking-widest text-white/20">
 							<a href="/privacidad" class="hover:text-white transition-colors">Privacidad</a>
 							<a href="/legal" class="hover:text-white transition-colors">Legal</a>
@@ -151,6 +194,103 @@ const footerText = globalConfig?.footerText || "© 2026 Coolhuntingnow";
 				to { transform: rotate(360deg); }
 			}
 			.animate-rotate-slow { animation: rotate-slow 15s linear infinite; }
+
+			/* Menú móvil */
+			.mobile-nav-link {
+				display: flex;
+				align-items: baseline;
+				gap: 1rem;
+				padding: 1rem 0;
+				font-family: 'Outfit', sans-serif;
+				font-size: 2.6rem;
+				font-weight: 900;
+				text-transform: uppercase;
+				letter-spacing: -0.04em;
+				color: #ffffff;
+				border-bottom: 1px solid rgba(255,255,255,0.08);
+				transition: all 0.25s ease;
+				font-style: italic;
+				position: relative;
+			}
+			.mobile-nav-link::before {
+				content: attr(data-num);
+				font-size: 0.65rem;
+				font-weight: 900;
+				letter-spacing: 0.2em;
+				color: rgba(255,255,255,0.25);
+				font-style: normal;
+				transition: color 0.25s ease;
+				align-self: center;
+				padding-bottom: 2px;
+			}
+			.mobile-nav-link:active,
+			.mobile-nav-link:hover {
+				color: #06b6d4;
+				padding-left: 0.5rem;
+				border-bottom-color: rgba(6,182,212,0.3);
+			}
+			.mobile-nav-link:active::before,
+			.mobile-nav-link:hover::before {
+				color: #06b6d4;
+			}
+			#menu-toggle.is-open .menu-bar:nth-child(1) {
+				transform: translateY(8px) rotate(45deg);
+			}
+			#menu-toggle.is-open .menu-bar:nth-child(2) {
+				opacity: 0;
+				transform: translateX(-8px);
+			}
+			#menu-toggle.is-open .menu-bar:nth-child(3) {
+				width: 1.5rem;
+				transform: translateY(-8px) rotate(-45deg);
+				align-self: center;
+			}
 		</style>
+
+		<script>
+			const toggle = document.getElementById('menu-toggle');
+			const menu = document.getElementById('mobile-menu');
+			const bgNum = document.getElementById('menu-bg-num');
+
+			toggle?.addEventListener('click', () => {
+				const isOpen = menu?.getAttribute('aria-hidden') === 'false';
+				menu?.setAttribute('aria-hidden', isOpen ? 'true' : 'false');
+				toggle.setAttribute('aria-expanded', isOpen ? 'false' : 'true');
+				toggle.classList.toggle('is-open', !isOpen);
+				menu?.classList.toggle('translate-x-full', isOpen);
+				document.body.style.overflow = isOpen ? '' : 'hidden';
+			});
+
+			const closeBtn = document.getElementById('menu-close');
+			closeBtn?.addEventListener('click', () => {
+				menu?.setAttribute('aria-hidden', 'true');
+				toggle?.setAttribute('aria-expanded', 'false');
+				toggle?.classList.remove('is-open');
+				menu?.classList.add('translate-x-full');
+				document.body.style.overflow = '';
+			});
+
+			menu?.querySelectorAll('a.mobile-nav-link').forEach(link => {
+				link.addEventListener('mouseenter', () => {
+					if (bgNum) bgNum.textContent = link.getAttribute('data-num') || '01';
+				});
+				link.addEventListener('click', () => {
+					menu.setAttribute('aria-hidden', 'true');
+					toggle?.setAttribute('aria-expanded', 'false');
+					toggle?.classList.remove('is-open');
+					menu.classList.add('translate-x-full');
+					document.body.style.overflow = '';
+				});
+			});
+
+			// Cerrar también con el botón Acceso
+			menu?.querySelector('a:not(.mobile-nav-link)')?.addEventListener('click', () => {
+				menu.setAttribute('aria-hidden', 'true');
+				toggle?.setAttribute('aria-expanded', 'false');
+				toggle?.classList.remove('is-open');
+				menu.classList.add('translate-x-full');
+				document.body.style.overflow = '';
+			});
+		</script>
 	</body>
 </html>
