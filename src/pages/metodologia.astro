@@ -65,8 +65,11 @@ const defaultSteps = [
 const steps = methodologyData?.steps?.length > 0 ? methodologyData.steps : defaultSteps;
 ---
 
-<Layout title="Metodología | CoolhuntingNow">
-  <main class="pt-32 pb-20 md:pb-40 min-h-screen bg-[#020617] relative overflow-hidden">
+<Layout 
+  title="Metodología | CoolhuntingNow"
+  description="Explora nuestra metodología de Coolhunting: un protocolo de inteligencia diseñado para descodificar señales de cambio y transformarlas en ventaja competitiva."
+>
+<main class="pt-32 pb-20 md:pb-40 min-h-screen bg-[#020617] relative overflow-hidden">
     
     <!-- TECH BACKGROUND ELEMENTS -->
     <div class="fixed inset-0 z-0 pointer-events-none">
@@ -89,7 +92,7 @@ const steps = methodologyData?.steps?.length > 0 ? methodologyData.steps : defau
            <span class="w-1.5 h-1.5 bg-brand-cyan rounded-full animate-ping"></span>
            <span class="text-[9px] font-outfit font-black uppercase italic tracking-[0.4em] text-white/60">INTELLIGENCE_PROTOCOL_v5.0</span>
         </div>
-        <h1 class="font-outfit text-5xl sm:text-7xl md:text-[11rem] font-black mb-8 tracking-tighter leading-[0.85] text-white uppercase italic" set:html={heroTitle} />
+        <h1 class="font-outfit text-[clamp(2.5rem,12vw,11rem)] sm:text-7xl md:text-[11rem] font-black mb-8 tracking-tighter leading-[0.85] text-white uppercase italic" set:html={heroTitle} />
         <p class="text-xl md:text-2xl text-white/65 font-outfit font-light leading-relaxed max-w-2xl border-l border-white/20 pl-8 italic" set:html={heroSubtitle} />
       </div>
 
