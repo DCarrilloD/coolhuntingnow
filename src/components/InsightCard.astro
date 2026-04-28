@@ -32,7 +32,7 @@ const tagStyles = getTagColor(insight.category);
     <div class="absolute inset-0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000 bg-gradient-to-r from-transparent via-white/10 to-transparent skew-x-12"></div>
 
     <div class="absolute top-6 left-6">
-        <span class={`px-4 py-1.5 rounded-full border text-[9px] font-outfit font-black uppercase italic tracking-[0.2em] backdrop-blur-md ${tagStyles}`}>
+        <span class={`px-4 py-1.5 rounded-full border text-[11px] font-outfit font-black uppercase italic tracking-[0.2em] backdrop-blur-md ${tagStyles}`}>
           {insight.category}
         </span>
     </div>
@@ -51,14 +51,13 @@ const tagStyles = getTagColor(insight.category);
     </p>
     
     <div class="pt-8 border-t border-white/5 flex items-center justify-between">
-      <div class="text-[9px] font-black text-white/70 uppercase tracking-widest italic">
+      <div class="text-[11px] font-black text-white/70 uppercase tracking-widest italic">
         Report_Data: {insight.date}
       </div>
       
       <a href={`/insights/${insight.slug || '#'}`} class="group/btn relative inline-flex items-center gap-3 overflow-hidden">
-        <span class="text-[10px] font-outfit font-black uppercase italic tracking-[0.2em] text-brand-cyan z-10">Read File</span>
+        <span class="text-[13px] font-outfit font-black uppercase italic tracking-[0.2em] text-brand-cyan z-10">Read File</span>
         <div class="w-8 h-8 rounded-full bg-brand-vibe/10 flex items-center justify-center group-hover/btn:w-24 group-active/btn:w-24 group-hover/btn:bg-brand-vibe group-active/btn:bg-brand-vibe transition-all duration-500 overflow-hidden relative">
-           <span class="text-brand-vibe group-hover/btn:text-white transition-colors">↗</span>
         </div>
       </a>
     </div>
