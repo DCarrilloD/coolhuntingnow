@@ -15,8 +15,8 @@ try {
 }
 
 // Valores por defecto (fallback) si no hay datos en Strapi
-const heroTitle = methodologyData?.heroTitle || "METODOLOGÍA <span class='text-brand-cyan'>COOLHUNTING</span>";
-const heroSubtitle = methodologyData?.heroSubtitle || "Un ecosistema de inteligencia diseñado para descodificar el futuro y transformarlo en <span class='text-white font-bold italic tracking-wider'>ventaja competitiva</span>.";
+const heroTitle = "METODOLOGÍA <span class='text-brand-cyan'>COOLHUNTING</span>";
+const heroSubtitle = "Un ecosistema de inteligencia diseñado para descodificar el futuro y transformarlo en <span class='text-white font-bold italic tracking-wider'>ventaja competitiva</span>.";
 const philosophyTitle = methodologyData?.philosophyTitle || "Inteligencia Anticipatoria";
 
 const defaultSteps = [
@@ -92,7 +92,7 @@ const steps = methodologyData?.steps?.length > 0 ? methodologyData.steps : defau
            <span class="w-1.5 h-1.5 bg-brand-cyan rounded-full animate-ping"></span>
            <span class="text-[9px] font-outfit font-black uppercase italic tracking-[0.4em] text-white/60">INTELLIGENCE_PROTOCOL_v5.0</span>
         </div>
-        <h1 class="font-outfit text-[clamp(2.5rem,12vw,11rem)] sm:text-7xl md:text-[11rem] font-black mb-8 tracking-tighter leading-[0.85] text-white uppercase italic" set:html={heroTitle} />
+        <h1 class="font-outfit text-[clamp(2.5rem,10vw,8.5rem)] sm:text-7xl md:text-[8.5rem] font-black mb-8 tracking-tighter leading-[0.85] text-white uppercase italic" set:html={heroTitle} />
         <p class="text-xl md:text-2xl text-white/65 font-outfit font-light leading-relaxed max-w-2xl border-l border-white/20 pl-8 italic" set:html={heroSubtitle} />
       </div>
 
