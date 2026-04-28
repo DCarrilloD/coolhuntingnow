@@ -54,7 +54,7 @@ const sortedInsights = [...insights].sort((a, b) => b.timestamp - a.timestamp);
 
 <Layout 
   title="Insights Hub | CoolhuntingNow"
-  description="Biblioteca exclusiva de señales, macrotendencias y estudios estratégicos. Decodifica el ruido global y anticípate a los cambios del mercado."
+  description="Hub de Inteligencia Estratégica: Biblioteca exclusiva de macrotendencias, señales de innovación y estudios de foresight. Anticipa los cambios del mercado con nuestro análisis experto."
 >
   <main class="pt-32 pb-20 md:pb-40 min-h-screen bg-[#020617] relative overflow-hidden">
     
@@ -221,21 +221,36 @@ const sortedInsights = [...insights].sort((a, b) => b.timestamp - a.timestamp);
     const coordDisplay = document.getElementById('coord-display');
 
     if (container && core && glow) {
-      container.addEventListener('mousemove', (e) => {
-        const { left, top, width, height } = container.getBoundingClientRect();
-        const x = (e.clientX - left) / width - 0.5;
-        const y = (e.clientY - top) / height - 0.5;
-        core.style.transform = `rotateY(${x * 50}deg) rotateX(${-y * 50}deg)`;
-        glow.style.left = `${e.clientX - left - 225}px`;
-        glow.style.top = `${e.clientY - top - 225}px`;
-        glow.style.opacity = '1';
+      let rect = container.getBoundingClientRect();
+      let ticking = false;
 
-        if (coordDisplay) {
-            const mockLat = (40.4124 + y * 0.05).toFixed(4);
-            const mockLng = (3.7038 + x * 0.05).toFixed(4);
-            coordDisplay.innerText = `${mockLat}N / ${mockLng}W`;
+      window.addEventListener('resize', () => {
+        rect = container.getBoundingClientRect();
+      });
+
+      container.addEventListener('mousemove', (e) => {
+        if (!ticking) {
+          requestAnimationFrame(() => {
+            const { left, top, width, height } = rect;
+            const x = (e.clientX - left) / width - 0.5;
+            const y = (e.clientY - top) / height - 0.5;
+            
+            core.style.transform = `rotateY(${x * 50}deg) rotateX(${-y * 50}deg)`;
+            glow.style.left = `${e.clientX - left - 225}px`;
+            glow.style.top = `${e.clientY - top - 225}px`;
+            glow.style.opacity = '1';
+
+            if (coordDisplay) {
+                const mockLat = (40.4124 + y * 0.05).toFixed(4);
+                const mockLng = (3.7038 + x * 0.05).toFixed(4);
+                coordDisplay.textContent = `${mockLat}N / ${mockLng}W`;
+            }
+            ticking = false;
+          });
+          ticking = true;
         }
       });
+
       container.addEventListener('mouseleave', () => {
         core.style.transform = `rotateY(0deg) rotateX(0deg)`;
         glow.style.opacity = '0';

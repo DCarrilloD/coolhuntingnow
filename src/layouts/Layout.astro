@@ -44,6 +44,16 @@ const footerText = globalConfig?.footerText || "© 2026 Coolhuntingnow";
 <html lang="es" class="bg-brand-dark scroll-smooth overflow-x-hidden">
 	<head>
 		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<script is:inline>
+			if (window.trustedTypes && window.trustedTypes.createPolicy) {
+				window.trustedTypes.createPolicy('default', {
+					createHTML: (string) => string,
+					createScript: (string) => string,
+					createScriptURL: (string) => string
+				});
+			}
+		</script>
 		<title>{title || globalConfig?.siteName || 'CoolhuntingNow'}</title>
 		
 		<!-- SEO BASICS -->
@@ -55,7 +65,15 @@ const footerText = globalConfig?.footerText || "© 2026 Coolhuntingnow";
 		<meta name="author" content="Coolhunting Group" />
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800;900&family=Inter:wght@200;300;400;500;700&display=swap" />
+		<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800;900&family=Inter:wght@200;300;400;500;700&display=swap" />
+		<link id="main-font-link" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800;900&family=Inter:wght@200;300;400;500;700&display=swap" media="print" />
+		<script is:inline>
+			const fontLink = document.getElementById('main-font-link');
+			if (fontLink) fontLink.media = 'all';
+		</script>
+		<noscript>
+			<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800;900&family=Inter:wght@200;300;400;500;700&display=swap" />
+		</noscript>
 		
 		<!-- OPEN GRAPH / SOCIAL META -->
 		<meta property="og:type" content="website" />
@@ -85,12 +103,12 @@ const footerText = globalConfig?.footerText || "© 2026 Coolhuntingnow";
 					<span class="font-outfit text-2xl font-black tracking-[-0.05em] uppercase italic">Coolhunting<span class="text-brand-cyan">NOW</span></span>
 				</a>
 				
-				<div class="hidden md:flex items-center gap-10 font-outfit font-black text-[11px] uppercase italic tracking-[0.2em]">
+				<div class="hidden md:flex items-center gap-10 font-outfit font-black text-[13px] uppercase italic tracking-[0.2em]">
 					<a href="/" class="nav-link hover:text-brand-cyan transition-colors">Now</a>
 					<a href="/insights" class="nav-link hover:text-brand-vibe transition-colors">Insights</a>
 					<a href="/metodologia" class="nav-link hover:text-brand-electric transition-colors">Metodología</a>
 					<a href="/equipo-coolhunting" class="nav-link hover:text-brand-cyan transition-colors">Equipo</a>
-					<a href="/contacto" class="px-8 py-3 bg-white text-black rounded-full hover:bg-brand-cyan hover:text-white transition-all shadow-xl font-outfit font-black uppercase italic tracking-[0.2em] text-[11px]">Acceso</a>
+					<a href="/contacto" class="px-8 py-3 bg-white text-black rounded-full hover:bg-brand-cyan hover:text-white transition-all shadow-xl font-outfit font-black uppercase italic tracking-[0.2em] text-[13px]">Acceso</a>
 				</div>
 
 				<!-- Botón hamburguesa (solo móvil) -->
@@ -124,8 +142,8 @@ const footerText = globalConfig?.footerText || "© 2026 Coolhuntingnow";
 
 			<!-- Footer del drawer -->
 			<div class="px-8 pb-12 shrink-0 border-t border-white/10 pt-8 flex flex-col gap-4">
-				<a href="/contacto" class="w-full px-8 py-4 bg-white text-black rounded-full font-outfit font-black uppercase italic tracking-[0.2em] text-[12px] text-center hover:bg-brand-cyan hover:text-white transition-all">Acceso</a>
-				<p class="text-center text-white/70 text-[10px] uppercase tracking-widest font-bold">Decoding the DNA of Tomorrow</p>
+				<a href="/contacto" class="w-full px-8 py-4 bg-white text-black rounded-full font-outfit font-black uppercase italic tracking-[0.2em] text-[13px] text-center hover:bg-brand-cyan hover:text-white transition-all">Acceso</a>
+				<p class="text-center text-white/70 text-[11px] uppercase tracking-widest font-bold">Decoding the DNA of Tomorrow</p>
 			</div>
 
 			<div class="absolute inset-0 flex items-center justify-center pointer-events-none select-none overflow-hidden" aria-hidden="true">
@@ -146,7 +164,7 @@ const footerText = globalConfig?.footerText || "© 2026 Coolhuntingnow";
 					<!-- Social Media Hub -->
 					<div class="flex gap-6 mb-16">
 						{socialMedia.map((social: any) => (
-							<a href={social.url} target="_blank" rel="noopener noreferrer" class="w-12 h-12 flex items-center justify-center rounded-xl bg-white/[0.03] border border-white/10 hover:border-brand-vibe hover:bg-brand-vibe/10 transition-all group scale-110">
+							<a href={social.url} target="_blank" rel="noopener noreferrer" aria-label={social.name} class="w-12 h-12 flex items-center justify-center rounded-xl bg-white/[0.03] border border-white/10 hover:border-brand-vibe hover:bg-brand-vibe/10 transition-all group scale-110">
 								<svg class="w-5 h-5 fill-white/40 group-hover:fill-brand-vibe transition-colors" viewBox="0 0 24 24">
 									<path d={social.icon}></path>
 								</svg>
@@ -155,7 +173,7 @@ const footerText = globalConfig?.footerText || "© 2026 Coolhuntingnow";
 					</div>
 
 					<!-- Secondary Navigation (Main Links) -->
-					<div class="flex flex-wrap justify-center items-center gap-x-6 md:gap-x-12 gap-y-6 mb-16 font-outfit text-xs font-black uppercase tracking-[0.25em] text-white/65 italic">
+					<div class="flex flex-wrap justify-center items-center gap-x-6 md:gap-x-12 gap-y-6 mb-16 font-outfit text-[13px] font-black uppercase tracking-[0.25em] text-white/65 italic">
 						<a href="https://www.coolhuntinguniversity.com/" target="_blank" class="hover:text-brand-cyan transition-colors">Programas de Coolhunting</a>
 						<span class="hidden md:block w-px h-4 bg-white/10"></span>
 						<a href="https://www.coolhuntinguniversity.com/" target="_blank" class="hover:text-brand-cyan transition-colors">Campus Online</a>
@@ -166,19 +184,19 @@ const footerText = globalConfig?.footerText || "© 2026 Coolhuntingnow";
 					<!-- Divider with Branding -->
 					<div class="w-full flex items-center gap-8 mb-16 opacity-50">
 						<div class="h-px flex-1 bg-gradient-to-r from-transparent to-white/10"></div>
-						<img src={globalConfig?.logo?.url || "https://res.cloudinary.com/dzldevft6/image/upload/v1776366717/cropped_Coolhunting_Now_3_300x120_cc581925f3.png"} alt="Coolhunting Now" class="h-16 object-contain brightness-0 invert opacity-40 hover:opacity-100 transition-opacity" />
+						<img src="https://res.cloudinary.com/dzldevft6/image/upload/v1776639090/cropped_Coolhunting_Now_3_300x120_7adc4cb55c.png" alt="Coolhunting Now" class="h-16 object-contain brightness-0 invert opacity-40 hover:opacity-100 transition-opacity" loading="lazy" />
 						<div class="h-px flex-1 bg-gradient-to-l from-transparent to-white/10"></div>
 					</div>
 
 					<!-- Legal & Copyright -->
 					<div class="flex flex-col md:flex-row items-center gap-4 md:gap-8">
-						<div class="flex gap-8 text-[10px] font-black uppercase tracking-widest text-white/70">
+						<div class="flex gap-8 text-[11px] font-black uppercase tracking-widest text-white/70">
 							<a href="/privacidad" class="hover:text-white transition-colors">Privacidad</a>
 							<a href="/legal" class="hover:text-white transition-colors">Legal</a>
 							<a href="/cookies" class="hover:text-white transition-colors">Política de cookies</a>
 						</div>
 						<span class="hidden md:block w-px h-4 bg-white/5"></span>
-						<p class="text-[11px] font-bold text-white/80 uppercase tracking-widest">
+						<p class="text-xs font-bold text-white/80 uppercase tracking-widest">
 							{footerText}
 						</p>
 					</div>

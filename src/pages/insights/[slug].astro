@@ -214,7 +214,14 @@ const coverUrl = optimizeImage(insight.coverImage?.url, 1200);
     const nextBtn = document.getElementById('next-related');
 
     if (container && prevBtn && nextBtn) {
-        const scrollAmount = 480; // Aproximadamente el ancho de una carta + gap
+        const scrollAmount = 480;
+        let scrollWidth = container.scrollWidth;
+        let clientWidth = container.clientWidth;
+
+        window.addEventListener('resize', () => {
+            scrollWidth = container.scrollWidth;
+            clientWidth = container.clientWidth;
+        });
 
         prevBtn.addEventListener('click', () => {
             container.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
@@ -224,13 +231,19 @@ const coverUrl = optimizeImage(insight.coverImage?.url, 1200);
             container.scrollBy({ left: scrollAmount, behavior: 'smooth' });
         });
 
-        // Opcional: ocultar flechas si no hay suficiente scroll
+        let ticking = false;
         container.addEventListener('scroll', () => {
-            const isAtStart = container.scrollLeft === 0;
-            const isAtEnd = container.scrollLeft + container.clientWidth >= container.scrollWidth - 10;
-            
-            prevBtn.style.opacity = isAtStart ? '0.3' : '1';
-            nextBtn.style.opacity = isAtEnd ? '0.3' : '1';
+            if (!ticking) {
+                requestAnimationFrame(() => {
+                    const isAtStart = container.scrollLeft === 0;
+                    const isAtEnd = container.scrollLeft + clientWidth >= scrollWidth - 10;
+                    
+                    prevBtn.style.opacity = isAtStart ? '0.3' : '1';
+                    nextBtn.style.opacity = isAtEnd ? '0.3' : '1';
+                    ticking = false;
+                });
+                ticking = true;
+            }
         });
     }
 </script>
