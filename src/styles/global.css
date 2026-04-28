@@ -46,9 +46,9 @@ body {
 }
 
 .btn-primary {
-  @apply relative overflow-hidden px-8 py-3 rounded-full font-bold transition-all duration-300;
-  background-color: #2563eb;
-  box-shadow: 0 0 20px rgba(37, 99, 235, 0.4);
+  @apply relative overflow-hidden px-8 py-3 rounded-full font-bold transition-all duration-300 text-white;
+  background-color: #1d4ed8;
+  box-shadow: 0 0 20px rgba(29, 78, 216, 0.4);
 }
 
 .btn-primary:hover {
