@@ -1,5 +1,6 @@
 ---
 import fetchApi from '../lib/strapi';
+import SpeedInsights from '@vercel/speed-insights/astro';
 
 const { title, description } = Astro.props;
 import '../styles/global.css';
@@ -310,5 +311,6 @@ const footerText = globalConfig?.footerText || "© 2026 Coolhuntingnow";
 				document.body.style.overflow = '';
 			});
 		</script>
+		<SpeedInsights />
 	</body>
 </html>
